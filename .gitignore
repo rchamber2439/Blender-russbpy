@@ -1,0 +1,4 @@
+*.blend
+*.log
+*.stl
+__pycache__
