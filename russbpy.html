@@ -1,0 +1,1409 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module russbpy</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>russbpy</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/Russ/Desktop/blender/tmp/russbpy.py">/Users/Russ/Desktop/blender/tmp/russbpy.py</a></font></td></tr></table>
+    <p><tt>russbpy.py&nbsp;-&nbsp;Russ&nbsp;Chamberlain's&nbsp;set&nbsp;of&nbsp;Blender&nbsp;Python&nbsp;extensions.<br>
+&nbsp;<br>
+NOTE:<br>
+-&nbsp;There&nbsp;are&nbsp;NO&nbsp;measurement&nbsp;units&nbsp;specified&nbsp;in&nbsp;this&nbsp;API.<br>
+&nbsp;&nbsp;The&nbsp;concept&nbsp;of&nbsp;units&nbsp;(eg.&nbsp;mm&nbsp;vs.&nbsp;inches)&nbsp;is&nbsp;usually&nbsp;only&nbsp;relevant&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;slicer&nbsp;that&nbsp;prepares&nbsp;a&nbsp;*.stl&nbsp;file&nbsp;for&nbsp;printing.<br>
+&nbsp;<br>
+#########################################<br>
+#########################################<br>
+TODO:<br>
+-&nbsp;Remove&nbsp;my&nbsp;own&nbsp;Vector&nbsp;and&nbsp;replace&nbsp;it&nbsp;with&nbsp;the&nbsp;mathutils&nbsp;Vector<br>
+-&nbsp;Add&nbsp;matrix-based&nbsp;functions&nbsp;to&nbsp;manipulate&nbsp;objects<br>
+#########################################<br>
+#########################################</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="russbpy.html#Shapeways_StrongAndFlexiblePlasticUnpolished">Shapeways_StrongAndFlexiblePlasticUnpolished</a>
+</font></dt><dt><font face="helvetica, arial"><a href="russbpy.html#Transformation">Transformation</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="russbpy.html#RotationDeg">RotationDeg</a>
+</font></dt><dt><font face="helvetica, arial"><a href="russbpy.html#Translation">Translation</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RotationDeg">class <strong>RotationDeg</strong></a>(<a href="russbpy.html#Transformation">Transformation</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RotationDeg-__init__"><strong>__init__</strong></a>(self, angle, axis, point)</dt><dd><tt>Set&nbsp;the&nbsp;rotation&nbsp;about&nbsp;the&nbsp;given&nbsp;point&nbsp;and&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;of&nbsp;rotation,&nbsp;in&nbsp;degrees<br>
+axis&nbsp;&nbsp;--&nbsp;The&nbsp;axis&nbsp;of&nbsp;rotation,&nbsp;as&nbsp;a&nbsp;vector&nbsp;from&nbsp;the&nbsp;origin&nbsp;that&nbsp;will&nbsp;be&nbsp;translated&nbsp;to&nbsp;the&nbsp;point<br>
+point&nbsp;--&nbsp;The&nbsp;point&nbsp;to&nbsp;rotate&nbsp;around</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="russbpy.html#Transformation">Transformation</a>:<br>
+<dl><dt><a name="RotationDeg-apply"><strong>apply</strong></a>(self, point_or_list)</dt><dd><tt>Apply&nbsp;the&nbsp;transformation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+point_or_list&nbsp;--&nbsp;A&nbsp;single&nbsp;point&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;points&nbsp;to&nbsp;transform<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;transformed&nbsp;point&nbsp;or&nbsp;list&nbsp;of&nbsp;points</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Shapeways_StrongAndFlexiblePlasticUnpolished">class <strong>Shapeways_StrongAndFlexiblePlasticUnpolished</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#################################################<br>
+#&nbsp;Materials<br>
+#################################################<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Shapeways_StrongAndFlexiblePlasticUnpolished-__init__"><strong>__init__</strong></a>(self, factor<font color="#909090">=1.0</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Transformation">class <strong>Transformation</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Transformation-__init__"><strong>__init__</strong></a>(self, matrix)</dt><dd><tt>Set&nbsp;the&nbsp;transformation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+matrix&nbsp;--&nbsp;The&nbsp;transformation&nbsp;matrix,&nbsp;of&nbsp;type&nbsp;mathutils.Matrix</tt></dd></dl>
+
+<dl><dt><a name="Transformation-apply"><strong>apply</strong></a>(self, point_or_list)</dt><dd><tt>Apply&nbsp;the&nbsp;transformation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+point_or_list&nbsp;--&nbsp;A&nbsp;single&nbsp;point&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;points&nbsp;to&nbsp;transform<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;transformed&nbsp;point&nbsp;or&nbsp;list&nbsp;of&nbsp;points</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Translation">class <strong>Translation</strong></a>(<a href="russbpy.html#Transformation">Transformation</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Translation-__init__"><strong>__init__</strong></a>(self, vector)</dt><dd><tt>Set&nbsp;the&nbsp;translation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+vector&nbsp;--&nbsp;The&nbsp;translation&nbsp;vector</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="russbpy.html#Transformation">Transformation</a>:<br>
+<dl><dt><a name="Translation-apply"><strong>apply</strong></a>(self, point_or_list)</dt><dd><tt>Apply&nbsp;the&nbsp;transformation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+point_or_list&nbsp;--&nbsp;A&nbsp;single&nbsp;point&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;points&nbsp;to&nbsp;transform<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;transformed&nbsp;point&nbsp;or&nbsp;list&nbsp;of&nbsp;points</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-ACos"><strong>ACos</strong></a>(val)</dt><dd><tt>Return&nbsp;the&nbsp;arccosine&nbsp;of&nbsp;a&nbsp;value<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+val&nbsp;--&nbsp;The&nbsp;cosine&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arccosine&nbsp;of&nbsp;the&nbsp;value&nbsp;in&nbsp;degrees</tt></dd></dl>
+ <dl><dt><a name="-ASin"><strong>ASin</strong></a>(val)</dt><dd><tt>Return&nbsp;the&nbsp;arcsine&nbsp;of&nbsp;a&nbsp;value<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+val&nbsp;--&nbsp;The&nbsp;sine&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arcsine&nbsp;of&nbsp;the&nbsp;value</tt></dd></dl>
+ <dl><dt><a name="-ATan"><strong>ATan</strong></a>(val)</dt><dd><tt>Return&nbsp;the&nbsp;arctangent&nbsp;of&nbsp;a&nbsp;value<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+val&nbsp;--&nbsp;The&nbsp;tangent&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arctangent&nbsp;of&nbsp;the&nbsp;value&nbsp;in&nbsp;degrees</tt></dd></dl>
+ <dl><dt><a name="-AddV"><strong>AddV</strong></a>(v1<font color="#909090">=(0, 0, 0)</font>, v2<font color="#909090">=(1, 1, 1)</font>)</dt><dd><tt>Add&nbsp;one&nbsp;vector&nbsp;to&nbsp;another<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v1&nbsp;--&nbsp;The&nbsp;first&nbsp;vector<br>
+v2&nbsp;--&nbsp;The&nbsp;second&nbsp;vector<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;sum&nbsp;of&nbsp;the&nbsp;vectors</tt></dd></dl>
+ <dl><dt><a name="-Arrow"><strong>Arrow</strong></a>(body_x<font color="#909090">=10</font>, body_y<font color="#909090">=1</font>, body_z<font color="#909090">=1</font>, head_r<font color="#909090">=2</font>)</dt><dd><tt>Draw&nbsp;an&nbsp;arrow&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;arrow&nbsp;lies&nbsp;along&nbsp;the&nbsp;X&nbsp;axis,&nbsp;pointing&nbsp;away&nbsp;from&nbsp;the&nbsp;origin&nbsp;towards&nbsp;the&nbsp;positive&nbsp;X-axis<br>
+The&nbsp;arrow&nbsp;is&nbsp;viewable&nbsp;from&nbsp;the&nbsp;Z-axis,&nbsp;viewing&nbsp;towards&nbsp;the&nbsp;origin<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+body_x&nbsp;--&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;arrow<br>
+body_y&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;arrow&nbsp;body<br>
+body_z&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;arrow<br>
+head_r&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;arrow&nbsp;head,&nbsp;containing&nbsp;three&nbsp;points&nbsp;of&nbsp;an&nbsp;equilateral&nbsp;triangle<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arrow&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-BallAndSocketJoint"><strong>BallAndSocketJoint</strong></a>(ball_radius<font color="#909090">=10.0</font>, socket_thickness<font color="#909090">=2.0</font>, socket_finger_gap<font color="#909090">=4.0</font>, socket_finger_base_offset<font color="#909090">=5.0</font>, socket_finger_tip_offset<font color="#909090">=5.0</font>, stem_height<font color="#909090">=10.0</font>, stem_radius<font color="#909090">=2.0</font>, center_in_ball<font color="#909090">=False</font>)</dt><dd><tt>Create&nbsp;a&nbsp;ball-and-socket&nbsp;joint&nbsp;in&nbsp;two&nbsp;pieces<br>
+&nbsp;<br>
+Both&nbsp;pieces&nbsp;will&nbsp;be&nbsp;standing&nbsp;at&nbsp;the&nbsp;origin&nbsp;with&nbsp;the&nbsp;top&nbsp;in&nbsp;the&nbsp;Z&nbsp;direction.<br>
+To&nbsp;get&nbsp;the&nbsp;ball&nbsp;to&nbsp;actually&nbsp;fit&nbsp;in&nbsp;the&nbsp;socket,&nbsp;you'll&nbsp;need&nbsp;to&nbsp;rotate&nbsp;one&nbsp;of&nbsp;the&nbsp;pieces&nbsp;180&nbsp;degrees&nbsp;around&nbsp;the&nbsp;X&nbsp;or&nbsp;Y&nbsp;axis.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ball_radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;ball<br>
+socket_thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;socket&nbsp;wall<br>
+socket_finger_gap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;space&nbsp;between&nbsp;the&nbsp;four&nbsp;"fingers"&nbsp;of&nbsp;the&nbsp;socket<br>
+socket_finger_base_offset&nbsp;--&nbsp;The&nbsp;offset&nbsp;of&nbsp;the&nbsp;finger&nbsp;base&nbsp;downwards&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;socket<br>
+socket_finger_tip_offset&nbsp;&nbsp;--&nbsp;The&nbsp;offset&nbsp;of&nbsp;the&nbsp;finger&nbsp;tips,&nbsp;upwards&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;socket<br>
+stem_height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+stem_radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+center_in_ball&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Is&nbsp;the&nbsp;object&nbsp;center&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;ball/socket?<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;tuple&nbsp;(&nbsp;ball&nbsp;object,&nbsp;socket&nbsp;object&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-BallJoint"><strong>BallJoint</strong></a>(ball_radius<font color="#909090">=10.0</font>, stem_height<font color="#909090">=5.0</font>, stem_radius<font color="#909090">=2.0</font>, center_in_ball<font color="#909090">=False</font>)</dt><dd><tt>Create&nbsp;a&nbsp;ball&nbsp;of&nbsp;a&nbsp;ball-and-socket&nbsp;joint.<br>
+&nbsp;<br>
+The&nbsp;ball&nbsp;points&nbsp;up&nbsp;in&nbsp;the&nbsp;Z&nbsp;axis&nbsp;relative&nbsp;to&nbsp;the&nbsp;origin.<br>
+The&nbsp;bottom&nbsp;of&nbsp;the&nbsp;stem&nbsp;is&nbsp;at&nbsp;the&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ball_radius&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;ball<br>
+stem_height&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+stem_radius&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+center_in_ball&nbsp;--&nbsp;Put&nbsp;the&nbsp;object&nbsp;center&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;ball,&nbsp;else&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;stem<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;ball&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Boolean"><strong>Boolean</strong></a>(ob1, ob2, op, delete<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;Boolean&nbsp;CSG&nbsp;(Constructive&nbsp;Solid&nbsp;Geometry)&nbsp;operation<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob1&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;left-hand&nbsp;object<br>
+ob2&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;right-hand&nbsp;object<br>
+op&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;Boolean&nbsp;CSG&nbsp;operation&nbsp;(&nbsp;'DIFFERENCE',&nbsp;'INTERSECT',&nbsp;or&nbsp;'UNION'&nbsp;)<br>
+delete&nbsp;--&nbsp;Delete&nbsp;ob2&nbsp;after&nbsp;the&nbsp;operation?<br>
+&nbsp;<br>
+Return&nbsp;an&nbsp;object&nbsp;that&nbsp;is&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;operation</tt></dd></dl>
+ <dl><dt><a name="-C"><strong>C</strong></a>(stroke_width<font color="#909090">=1.0</font>, height<font color="#909090">=10.0</font>, thickness<font color="#909090">=0.1</font>)</dt><dd><tt>Create&nbsp;a&nbsp;3D&nbsp;letter&nbsp;C&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+stroke_width&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;character's&nbsp;strokes<br>
+height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;letter<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-CharMetrics"><strong>CharMetrics</strong></a>(ch, font<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;a&nbsp;hash&nbsp;of&nbsp;metrics&nbsp;for&nbsp;the&nbsp;given&nbsp;character,&nbsp;as&nbsp;rendered&nbsp;in&nbsp;the&nbsp;given&nbsp;font<br>
+&nbsp;<br>
+When&nbsp;calculating&nbsp;the&nbsp;metrics,&nbsp;the&nbsp;character&nbsp;is&nbsp;rendered&nbsp;in&nbsp;the&nbsp;default&nbsp;font&nbsp;size,&nbsp;positioned&nbsp;at&nbsp;the&nbsp;origin.<br>
+The&nbsp;primary&nbsp;use&nbsp;of&nbsp;the&nbsp;metrics&nbsp;is&nbsp;for&nbsp;the&nbsp;height-to-width&nbsp;ratio&nbsp;and&nbsp;baseline&nbsp;offset&nbsp;ratio,&nbsp;so&nbsp;the&nbsp;font&nbsp;size&nbsp;used&nbsp;doesn't&nbsp;really&nbsp;matter.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ch&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;character<br>
+font&nbsp;--&nbsp;The&nbsp;file-system&nbsp;path&nbsp;to&nbsp;the&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;character&nbsp;(default&nbsp;Blender&nbsp;current&nbsp;font)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;hash&nbsp;object,&nbsp;with&nbsp;the&nbsp;following&nbsp;values&nbsp;defined:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Minimum&nbsp;width&nbsp;(X-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Maximum&nbsp;width&nbsp;(X-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Minimum&nbsp;height&nbsp;(Y-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Maximum&nbsp;height&nbsp;(Y-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;baseline_offset_h&nbsp;--&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;bottom&nbsp;extent&nbsp;relative&nbsp;to&nbsp;the&nbsp;character&nbsp;baseline</tt></dd></dl>
+ <dl><dt><a name="-Circle"><strong>Circle</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1</font>, vertices<font color="#909090">=None</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;circle&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;circle&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+vertices&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertices&nbsp;to&nbsp;use&nbsp;in&nbsp;the&nbsp;polygon&nbsp;approximation&nbsp;of&nbsp;the&nbsp;circle<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;circle<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;circle&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-CirclePoints"><strong>CirclePoints</strong></a>(r<font color="#909090">=1</font>, vertices<font color="#909090">=10</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Create&nbsp;a&nbsp;set&nbsp;of&nbsp;points&nbsp;on&nbsp;a&nbsp;circle&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+vertices&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertices&nbsp;to&nbsp;use&nbsp;in&nbsp;the&nbsp;polygon&nbsp;approximation&nbsp;of&nbsp;the&nbsp;circle<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;circle<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;list&nbsp;of&nbsp;vertices</tt></dd></dl>
+ <dl><dt><a name="-Cone"><strong>Cone</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1</font>, top_r<font color="#909090">=0</font>, h<font color="#909090">=1</font>, vertices<font color="#909090">=None</font>, cap<font color="#909090">=True</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;cone&nbsp;with&nbsp;the&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cone&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;base&nbsp;radius<br>
+top_r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;top&nbsp;radius&nbsp;(for&nbsp;truncated&nbsp;cones)<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;cone<br>
+vertices&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertices&nbsp;to&nbsp;use&nbsp;in&nbsp;the&nbsp;polygon&nbsp;approximation&nbsp;of&nbsp;the&nbsp;circle.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;to&nbsp;None&nbsp;to&nbsp;use&nbsp;the&nbsp;current&nbsp;default.<br>
+cap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Cap&nbsp;the&nbsp;base&nbsp;of&nbsp;the&nbsp;cone?&nbsp;If&nbsp;uncapped,&nbsp;the&nbsp;cone&nbsp;isn't&nbsp;solid.<br>
+location&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tube<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cone&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-ConvertToWorldCoordinates"><strong>ConvertToWorldCoordinates</strong></a>(ob)</dt><dd><tt>Convert&nbsp;the&nbsp;object's&nbsp;data&nbsp;to&nbsp;world&nbsp;coordinates<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Cos"><strong>Cos</strong></a>(theta)</dt><dd><tt>Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;an&nbsp;angle<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+theta&nbsp;--&nbsp;The&nbsp;angle,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;the&nbsp;angle</tt></dd></dl>
+ <dl><dt><a name="-CrossProduct"><strong>CrossProduct</strong></a>(x1, y1, z1, x2, y2, z2)</dt><dd><tt>Return&nbsp;the&nbsp;cross&nbsp;product&nbsp;between&nbsp;vector&nbsp;1&nbsp;and&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+x1&nbsp;--&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+y1&nbsp;--&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+z1&nbsp;--&nbsp;The&nbsp;z&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+x2&nbsp;--&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+y2&nbsp;--&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+z2&nbsp;--&nbsp;The&nbsp;z&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cross&nbsp;product&nbsp;of&nbsp;the&nbsp;two&nbsp;vectors</tt></dd></dl>
+ <dl><dt><a name="-CrossProductV"><strong>CrossProductV</strong></a>(v1<font color="#909090">=(0, 0, 0)</font>, v2<font color="#909090">=(0, 0, 1.0)</font>)</dt><dd><tt>Return&nbsp;the&nbsp;cross&nbsp;product&nbsp;between&nbsp;vector&nbsp;1&nbsp;and&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v1&nbsp;--&nbsp;The&nbsp;first&nbsp;vector<br>
+v2&nbsp;--&nbsp;The&nbsp;second&nbsp;vector<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cross&nbsp;product&nbsp;of&nbsp;the&nbsp;two&nbsp;vectors</tt></dd></dl>
+ <dl><dt><a name="-Cube"><strong>Cube</strong></a>(name<font color="#909090">=None</font>, size<font color="#909090">=1</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;cube&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;of&nbsp;each&nbsp;edge<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;cube<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cube&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Cup"><strong>Cup</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=0.9</font>, h<font color="#909090">=1.0</font>, wall_thickness<font color="#909090">=0.1</font>, base_thickness<font color="#909090">=0.1</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;cylindrical&nbsp;cup&nbsp;with&nbsp;a&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;the&nbsp;open&nbsp;end&nbsp;along&nbsp;the&nbsp;positive&nbsp;Z&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cup&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius&nbsp;of&nbsp;the&nbsp;cup<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;cup<br>
+wall_thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;curved&nbsp;wall<br>
+base_thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;circular&nbsp;base<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tube</tt></dd></dl>
+ <dl><dt><a name="-Current"><strong>Current</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;object<br>
+&nbsp;<br>
+Note&nbsp;there&nbsp;may&nbsp;be&nbsp;several&nbsp;objects&nbsp;selected,&nbsp;but&nbsp;there&nbsp;can&nbsp;only&nbsp;be&nbsp;one&nbsp;current&nbsp;object.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Cylinder"><strong>Cylinder</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, h<font color="#909090">=1.0</font>, vertices<font color="#909090">=None</font>, cap<font color="#909090">=True</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;cylinder&nbsp;with&nbsp;the&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cylinder&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height<br>
+vertices&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertices&nbsp;to&nbsp;use&nbsp;in&nbsp;the&nbsp;polygon&nbsp;approximation&nbsp;of&nbsp;the&nbsp;circle<br>
+cap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Cap&nbsp;the&nbsp;ends&nbsp;of&nbsp;the&nbsp;cylinder?&nbsp;If&nbsp;uncapped,&nbsp;the&nbsp;cylinder&nbsp;isn't&nbsp;solid.<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;cylinder<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cylinder&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-CylinderP2P"><strong>CylinderP2P</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, p1<font color="#909090">=(0, 0, 0)</font>, p2<font color="#909090">=(1.0, 1.0, 1.0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;cylinder&nbsp;from&nbsp;p1&nbsp;to&nbsp;p2.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cylinder&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+p1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;start&nbsp;point<br>
+p2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;end&nbsp;point<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cylinder&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-CylindricalText"><strong>CylindricalText</strong></a>(text<font color="#909090">='Abc123'</font>, font<font color="#909090">=None</font>, r<font color="#909090">=1</font>, thickness<font color="#909090">=0.05</font>, angular_height<font color="#909090">=30</font>, subdivide<font color="#909090">=1</font>, inverse<font color="#909090">=False</font>, spacer_deg<font color="#909090">=4</font>, backwards<font color="#909090">=False</font>, escape<font color="#909090">='_'</font>)</dt><dd><tt>Draw&nbsp;cylindrical&nbsp;text&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+text&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;text&nbsp;to&nbsp;draw<br>
+font&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius&nbsp;of&nbsp;the&nbsp;text<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;text<br>
+angular_height&nbsp;--&nbsp;The&nbsp;angular&nbsp;height&nbsp;of&nbsp;the&nbsp;text,&nbsp;in&nbsp;degrees&nbsp;up&nbsp;from&nbsp;the&nbsp;equator&nbsp;of&nbsp;the&nbsp;cylinder<br>
+subdivide&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;subdivisions.&nbsp;Higher&nbsp;numbers&nbsp;mean&nbsp;more,&nbsp;smaller&nbsp;faces<br>
+inverse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Take&nbsp;out&nbsp;the&nbsp;text&nbsp;and&nbsp;leave&nbsp;the&nbsp;cylinder?&nbsp;Otherwise,&nbsp;leave&nbsp;only&nbsp;the&nbsp;text<br>
+spacer_deg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;spacer&nbsp;degrees&nbsp;between&nbsp;characters<br>
+backwards&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Draw&nbsp;the&nbsp;text&nbsp;backwards&nbsp;so&nbsp;it&nbsp;is&nbsp;readable&nbsp;from&nbsp;inside&nbsp;the&nbsp;cylinder?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise&nbsp;the&nbsp;text&nbsp;is&nbsp;readable&nbsp;from&nbsp;outside&nbsp;the&nbsp;cylinder<br>
+escape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;character&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;space&nbsp;substitute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;because&nbsp;only&nbsp;non-blank&nbsp;characters&nbsp;can&nbsp;be&nbsp;measured<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cylindrical&nbsp;text&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-DegToRad"><strong>DegToRad</strong></a>(deg)</dt><dd><tt>Convert&nbsp;degrees&nbsp;to&nbsp;radians<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+deg&nbsp;--&nbsp;The&nbsp;degree&nbsp;value&nbsp;to&nbsp;convert<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;equivalent&nbsp;angle,&nbsp;in&nbsp;radians</tt></dd></dl>
+ <dl><dt><a name="-Delete"><strong>Delete</strong></a>(ob<font color="#909090">=None</font>)</dt><dd><tt>Delete&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;delete<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-DeleteSelected"><strong>DeleteSelected</strong></a>()</dt><dd><tt>Delete&nbsp;the&nbsp;currently&nbsp;selected&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Difference"><strong>Difference</strong></a>(ob1, ob2, delete<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;Boolean&nbsp;CSG&nbsp;(Constructive&nbsp;Solid&nbsp;Geometry)&nbsp;operation<br>
+&nbsp;<br>
+WARNING!&nbsp;This&nbsp;operation&nbsp;can&nbsp;take&nbsp;a&nbsp;LONG&nbsp;time&nbsp;with&nbsp;complex&nbsp;objects!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;strongly&nbsp;suggested&nbsp;you&nbsp;minimize&nbsp;the&nbsp;number&nbsp;of&nbsp;calls&nbsp;made&nbsp;to&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;can&nbsp;fail&nbsp;if&nbsp;vertices&nbsp;and/or&nbsp;faces&nbsp;are&nbsp;within&nbsp;Blender's&nbsp;tolerances<br>
+for&nbsp;points&nbsp;being&nbsp;too&nbsp;close.&nbsp;Consider&nbsp;scaling&nbsp;the&nbsp;object&nbsp;by&nbsp;a&nbsp;factor&nbsp;of&nbsp;10&nbsp;or&nbsp;100<br>
+before&nbsp;calling&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob1&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;left-hand&nbsp;operand<br>
+ob2&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;right-hand&nbsp;operand<br>
+delete&nbsp;--&nbsp;Delete&nbsp;ob2&nbsp;after&nbsp;the&nbsp;operation?<br>
+&nbsp;<br>
+Return&nbsp;an&nbsp;object&nbsp;consisting&nbsp;of&nbsp;the&nbsp;solid&nbsp;spaces&nbsp;in&nbsp;ob1&nbsp;and&nbsp;not&nbsp;in&nbsp;ob2</tt></dd></dl>
+ <dl><dt><a name="-Dimensions"><strong>Dimensions</strong></a>(ob)</dt><dd><tt>Return&nbsp;an&nbsp;object's&nbsp;dimensions<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object's&nbsp;dimensions&nbsp;as&nbsp;(x,y,z)</tt></dd></dl>
+ <dl><dt><a name="-Distance"><strong>Distance</strong></a>(x1, y1, z1, x2, y2, z2)</dt><dd><tt>Return&nbsp;the&nbsp;distance&nbsp;between&nbsp;two&nbsp;points<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+x1&nbsp;--&nbsp;The&nbsp;X&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;first&nbsp;point<br>
+y1&nbsp;--&nbsp;The&nbsp;Y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;first&nbsp;point<br>
+z1&nbsp;--&nbsp;The&nbsp;Z&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;first&nbsp;point<br>
+x2&nbsp;--&nbsp;The&nbsp;X&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;second&nbsp;point<br>
+y2&nbsp;--&nbsp;The&nbsp;Y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;second&nbsp;point<br>
+z2&nbsp;--&nbsp;The&nbsp;Z&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;second&nbsp;point<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;distance&nbsp;between&nbsp;(x1,y1,z1)&nbsp;and&nbsp;(x2,y2,z2)</tt></dd></dl>
+ <dl><dt><a name="-DistanceV"><strong>DistanceV</strong></a>(p1, p2)</dt><dd><tt>Return&nbsp;the&nbsp;distance&nbsp;between&nbsp;two&nbsp;points<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+p1&nbsp;--&nbsp;The&nbsp;first&nbsp;(x,y,z)&nbsp;point<br>
+p2&nbsp;--&nbsp;The&nbsp;second&nbsp;(x,y,z)&nbsp;point<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;distance&nbsp;between&nbsp;p1&nbsp;and&nbsp;p2</tt></dd></dl>
+ <dl><dt><a name="-DotProduct"><strong>DotProduct</strong></a>(x1, y1, z1, x2, y2, z2)</dt><dd><tt>Return&nbsp;the&nbsp;dot&nbsp;product&nbsp;between&nbsp;vector&nbsp;1&nbsp;and&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+x1&nbsp;--&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+y1&nbsp;--&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+z1&nbsp;--&nbsp;The&nbsp;z&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;1<br>
+x2&nbsp;--&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+y2&nbsp;--&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+z2&nbsp;--&nbsp;The&nbsp;z&nbsp;coordinate&nbsp;of&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;dot&nbsp;product&nbsp;of&nbsp;the&nbsp;two&nbsp;vectors</tt></dd></dl>
+ <dl><dt><a name="-DotProductV"><strong>DotProductV</strong></a>(v1, v2)</dt><dd><tt>Return&nbsp;the&nbsp;dot&nbsp;product&nbsp;between&nbsp;vector&nbsp;1&nbsp;and&nbsp;vector&nbsp;2<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v1&nbsp;--&nbsp;The&nbsp;first&nbsp;vector<br>
+v2&nbsp;--&nbsp;The&nbsp;second&nbsp;vector<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;dot&nbsp;product&nbsp;of&nbsp;the&nbsp;two&nbsp;vectors</tt></dd></dl>
+ <dl><dt><a name="-Duplicate"><strong>Duplicate</strong></a>(ob<font color="#909090">=None</font>)</dt><dd><tt>Duplicate&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;duplicate.&nbsp;If&nbsp;None,&nbsp;use&nbsp;the&nbsp;currently&nbsp;selected&nbsp;object.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;object&nbsp;which&nbsp;is&nbsp;a&nbsp;duplicate&nbsp;of&nbsp;the&nbsp;input</tt></dd></dl>
+ <dl><dt><a name="-EdgeCount"><strong>EdgeCount</strong></a>(ob)</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;edges&nbsp;in&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;number&nbsp;of&nbsp;edges</tt></dd></dl>
+ <dl><dt><a name="-EdgeInfo"><strong>EdgeInfo</strong></a>(ob, edge_index)</dt><dd><tt>Return&nbsp;the&nbsp;information&nbsp;for&nbsp;the&nbsp;given&nbsp;object's&nbsp;edge<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object<br>
+edge_index&nbsp;--&nbsp;The&nbsp;edge&nbsp;index,&nbsp;origin&nbsp;zero<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;edge&nbsp;information,&nbsp;as&nbsp;follows:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;vertex1_index,&nbsp;vertex2_index&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-Elapsed"><strong>Elapsed</strong></a>(msg<font color="#909090">=None</font>)</dt><dd><tt>Display&nbsp;the&nbsp;elapsed&nbsp;time,&nbsp;with&nbsp;an&nbsp;optional&nbsp;message<br>
+&nbsp;<br>
+The&nbsp;elapsed&nbsp;time&nbsp;is&nbsp;shown&nbsp;relative&nbsp;from&nbsp;both&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;<a href="#-Elapsed">Elapsed</a>()&nbsp;and&nbsp;from&nbsp;program&nbsp;start<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+msg&nbsp;--&nbsp;An&nbsp;optional&nbsp;text&nbsp;message&nbsp;to&nbsp;display&nbsp;next&nbsp;to&nbsp;the&nbsp;elapsed&nbsp;time<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-FaceCenter"><strong>FaceCenter</strong></a>(ob, face_num<font color="#909090">=0</font>)</dt><dd><tt>Determine&nbsp;the&nbsp;point&nbsp;at&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;given&nbsp;face.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object<br>
+face_num&nbsp;--&nbsp;The&nbsp;zero-based&nbsp;face&nbsp;number&nbsp;to&nbsp;select<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;point&nbsp;at&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;face.</tt></dd></dl>
+ <dl><dt><a name="-Fini"><strong>Fini</strong></a>()</dt><dd><tt>Finalize&nbsp;the&nbsp;russbpy&nbsp;module<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;calls&nbsp;<a href="#-ShowAll">ShowAll</a>()&nbsp;to&nbsp;show&nbsp;all&nbsp;objects.<br>
+This&nbsp;function&nbsp;calls&nbsp;<a href="#-SaveSTL">SaveSTL</a>()&nbsp;to&nbsp;export&nbsp;all&nbsp;objects&nbsp;to&nbsp;an&nbsp;STL&nbsp;file&nbsp;with&nbsp;the&nbsp;same&nbsp;filename&nbsp;as&nbsp;the&nbsp;main&nbsp;Python&nbsp;module.<br>
+This&nbsp;function&nbsp;calls&nbsp;<a href="#-SelectNone">SelectNone</a>()&nbsp;to&nbsp;remove&nbsp;all&nbsp;selections&nbsp;(which&nbsp;can&nbsp;be&nbsp;distracting).<br>
+Finally,&nbsp;<a href="#-Elapsed">Elapsed</a>()&nbsp;is&nbsp;called&nbsp;to&nbsp;show&nbsp;the&nbsp;total&nbsp;elapsed&nbsp;time&nbsp;since&nbsp;<a href="#-Init">Init</a>()&nbsp;was&nbsp;called.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-FlatTorus"><strong>FlatTorus</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1</font>, h<font color="#909090">=0.25</font>, minor_w<font color="#909090">=0.25</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid,&nbsp;flattened&nbsp;torus&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;flattened&nbsp;torus&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;to&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;extruded&nbsp;rectangle&nbsp;forming&nbsp;the&nbsp;torus<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;flattened&nbsp;torus<br>
+minor_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;(along&nbsp;the&nbsp;radius)&nbsp;of&nbsp;the&nbsp;ring&nbsp;around&nbsp;the&nbsp;flattened&nbsp;torus<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;torus<br>
+&nbsp;<br>
+return&nbsp;the&nbsp;torus&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-GetFN"><strong>GetFN</strong></a>()</dt><dd><tt>Get&nbsp;the&nbsp;current&nbsp;fineness&nbsp;setting<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;fineness&nbsp;setting</tt></dd></dl>
+ <dl><dt><a name="-GetRotationToV"><strong>GetRotationToV</strong></a>(ob_normal<font color="#909090">=(0, 0, 1.0)</font>, v<font color="#909090">=(0, 0, 1.0)</font>)</dt><dd><tt>Get&nbsp;the&nbsp;angle&nbsp;and&nbsp;axis&nbsp;of&nbsp;rotation&nbsp;to&nbsp;rotate&nbsp;an&nbsp;object&nbsp;towards&nbsp;the&nbsp;given&nbsp;vector.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob_normal&nbsp;--&nbsp;The&nbsp;object's&nbsp;normal&nbsp;vector<br>
+v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;to&nbsp;rotate&nbsp;to<br>
+&nbsp;<br>
+Return&nbsp;(&nbsp;angle,&nbsp;axis&nbsp;),&nbsp;where&nbsp;axis&nbsp;is&nbsp;an&nbsp;(X,Y,Z)&nbsp;vector</tt></dd></dl>
+ <dl><dt><a name="-GetTransformMetadata"><strong>GetTransformMetadata</strong></a>()</dt><dd><tt>Get&nbsp;the&nbsp;current&nbsp;transform_metadata&nbsp;setting<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;transform_metadata&nbsp;setting</tt></dd></dl>
+ <dl><dt><a name="-Init"><strong>Init</strong></a>(fn<font color="#909090">=32</font>, transform_metadata<font color="#909090">=False</font>, quiet<font color="#909090">=False</font>)</dt><dd><tt>Initialize&nbsp;the&nbsp;russbpy&nbsp;module<br>
+&nbsp;<br>
+The&nbsp;elapsed&nbsp;time&nbsp;for&nbsp;the&nbsp;<a href="#-Elapsed">Elapsed</a>()&nbsp;function&nbsp;starts&nbsp;when&nbsp;<a href="#-Init">Init</a>()&nbsp;is&nbsp;called.<br>
+All&nbsp;objects&nbsp;are&nbsp;deleted&nbsp;during&nbsp;this&nbsp;call.<br>
+The&nbsp;current&nbsp;cursor&nbsp;location&nbsp;is&nbsp;put&nbsp;to&nbsp;the&nbsp;origin&nbsp;(0,0,0)<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+fn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;fineness&nbsp;setting,&nbsp;which&nbsp;determines&nbsp;how&nbsp;finely&nbsp;objects&nbsp;will&nbsp;be&nbsp;faceted&nbsp;by&nbsp;default<br>
+transform_metadata&nbsp;--&nbsp;Whether&nbsp;or&nbsp;not&nbsp;metadata&nbsp;gets&nbsp;transformed&nbsp;with&nbsp;objects.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Intersect"><strong>Intersect</strong></a>(ob1, ob2, delete<font color="#909090">=False</font>)</dt><dd><tt>Intersect&nbsp;ob1&nbsp;with&nbsp;ob2<br>
+&nbsp;<br>
+WARNING!&nbsp;This&nbsp;operation&nbsp;can&nbsp;take&nbsp;a&nbsp;LONG&nbsp;time&nbsp;with&nbsp;complex&nbsp;objects!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;strongly&nbsp;suggested&nbsp;you&nbsp;minimize&nbsp;the&nbsp;number&nbsp;of&nbsp;calls&nbsp;made&nbsp;to&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;can&nbsp;fail&nbsp;if&nbsp;vertices&nbsp;and/or&nbsp;faces&nbsp;are&nbsp;within&nbsp;Blender's&nbsp;tolerances<br>
+for&nbsp;points&nbsp;being&nbsp;too&nbsp;close.&nbsp;Consider&nbsp;scaling&nbsp;the&nbsp;object&nbsp;by&nbsp;a&nbsp;factor&nbsp;of&nbsp;10&nbsp;or&nbsp;100<br>
+before&nbsp;calling&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob1&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;left-hand&nbsp;operand<br>
+ob2&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;right-hand&nbsp;operand<br>
+delete&nbsp;--&nbsp;Delete&nbsp;ob2&nbsp;after&nbsp;the&nbsp;operation?<br>
+&nbsp;<br>
+Return&nbsp;an&nbsp;object&nbsp;consisting&nbsp;of&nbsp;the&nbsp;solid&nbsp;spaces&nbsp;that&nbsp;occur&nbsp;in&nbsp;both&nbsp;ob1&nbsp;and&nbsp;ob2</tt></dd></dl>
+ <dl><dt><a name="-Join"><strong>Join</strong></a>(*obs)</dt><dd><tt>Join&nbsp;objects&nbsp;into&nbsp;a&nbsp;single&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+obs&nbsp;--&nbsp;The&nbsp;array&nbsp;of&nbsp;objects&nbsp;to&nbsp;join<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-L"><strong>L</strong></a>(stroke_width<font color="#909090">=1.0</font>, height<font color="#909090">=10.0</font>, width<font color="#909090">=5.0</font>, thickness<font color="#909090">=0.1</font>)</dt><dd><tt>Create&nbsp;a&nbsp;3D&nbsp;letter&nbsp;L&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+stroke_width&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;character's&nbsp;strokes<br>
+height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;letter<br>
+width&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;letter<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Location"><strong>Location</strong></a>(ob)</dt><dd><tt>Return&nbsp;the&nbsp;location&nbsp;of&nbsp;an&nbsp;object's&nbsp;origin<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object's&nbsp;location&nbsp;as&nbsp;(x,y,z)</tt></dd></dl>
+ <dl><dt><a name="-Mesh"><strong>Mesh</strong></a>(name<font color="#909090">=None</font>, verts<font color="#909090">=[]</font>, edges<font color="#909090">=[]</font>, faces<font color="#909090">=[]</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;mesh&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;mesh&nbsp;object<br>
+verts&nbsp;--&nbsp;The&nbsp;(x,y,z)&nbsp;vertices&nbsp;for&nbsp;the&nbsp;mesh<br>
+edges&nbsp;--&nbsp;The&nbsp;(v1,v2)&nbsp;edges&nbsp;for&nbsp;the&nbsp;mesh,&nbsp;where&nbsp;v1&nbsp;and&nbsp;v2&nbsp;are&nbsp;in&nbsp;range(0,len(verts))<br>
+faces&nbsp;--&nbsp;The&nbsp;faces&nbsp;for&nbsp;the&nbsp;mesh,&nbsp;as&nbsp;triangles&nbsp;(v1,v2,v3)&nbsp;or&nbsp;quads&nbsp;(v1,v2,v3,v4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;v1,&nbsp;v2,&nbsp;v3&nbsp;and&nbsp;v4&nbsp;are&nbsp;in&nbsp;range(0,len(edges))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;the&nbsp;faces&nbsp;are&nbsp;constructed&nbsp;using&nbsp;the&nbsp;right-hand&nbsp;rule<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;mesh&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-MeshCylinder"><strong>MeshCylinder</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, h<font color="#909090">=5.0</font>, r_faces<font color="#909090">=5</font>, h_faces<font color="#909090">=5</font>, c_faces<font color="#909090">=10</font>, location<font color="#909090">=(0, 0, 0)</font>, quads<font color="#909090">=True</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;cylinder&nbsp;with&nbsp;the&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;with&nbsp;control&nbsp;of&nbsp;the&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cylinder&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height<br>
+r_faces&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;faces&nbsp;per&nbsp;radial&nbsp;line<br>
+h_faces&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;faces&nbsp;per&nbsp;height&nbsp;line<br>
+c_faces&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;faces&nbsp;per&nbsp;circumference<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;cylinder<br>
+quads&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Use&nbsp;quads&nbsp;or&nbsp;triangles?<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cylinder&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-MeshRectangularPrism"><strong>MeshRectangularPrism</strong></a>(name<font color="#909090">=None</font>, x<font color="#909090">=10</font>, x_faces<font color="#909090">=10</font>, y<font color="#909090">=20</font>, y_faces<font color="#909090">=20</font>, z<font color="#909090">=30</font>, z_faces<font color="#909090">=30</font>, location<font color="#909090">=(0, 0, 0)</font>, quads<font color="#909090">=True</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;rectangular&nbsp;prism&nbsp;with&nbsp;control&nbsp;over&nbsp;the&nbsp;number&nbsp;of&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+x_faces&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+y_faces&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+z_faces&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangular&nbsp;prism<br>
+quads&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Use&nbsp;quads&nbsp;or&nbsp;triangles?<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;rectangular&nbsp;prism&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-MeshSphere"><strong>MeshSphere</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, latitudes<font color="#909090">=11</font>, longitudes<font color="#909090">=10</font>, location<font color="#909090">=(0, 0, 0)</font>, quads<font color="#909090">=True</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;sphere&nbsp;and&nbsp;with&nbsp;evenly-spaced&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;sphere&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+latitudes&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertical&nbsp;latitude&nbsp;lines<br>
+longitudes&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;rings&nbsp;(horizontal&nbsp;slices)<br>
+location&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;sphere<br>
+quads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Use&nbsp;quads&nbsp;or&nbsp;triangles?<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;sphere&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-MeshTorus"><strong>MeshTorus</strong></a>(name<font color="#909090">=None</font>, major_radius<font color="#909090">=4.0</font>, minor_radius<font color="#909090">=1.0</font>, rings<font color="#909090">=10</font>, ring_points<font color="#909090">=5</font>, location<font color="#909090">=(0, 0, 0)</font>, quads<font color="#909090">=True</font>)</dt><dd><tt>Create&nbsp;a&nbsp;solid&nbsp;torus&nbsp;with&nbsp;evenly-spaced&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+major_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;to&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle&nbsp;forming&nbsp;the&nbsp;torus<br>
+minor_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle&nbsp;forming&nbsp;the&nbsp;torus<br>
+rings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;segments&nbsp;having&nbsp;a&nbsp;circular&nbsp;cross-section<br>
+ring_points&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;points&nbsp;on&nbsp;each&nbsp;ring<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;torus<br>
+quads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Use&nbsp;quads&nbsp;or&nbsp;triangles?<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;torus&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Mul"><strong>Mul</strong></a>(p<font color="#909090">=(0.0, 0.0, 0.0)</font>, f<font color="#909090">=1.0</font>)</dt><dd><tt>Multiply&nbsp;a&nbsp;vector&nbsp;by&nbsp;a&nbsp;constant&nbsp;factor<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+p&nbsp;--&nbsp;The&nbsp;point<br>
+f&nbsp;--&nbsp;The&nbsp;multiplicative&nbsp;factor<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;vector&nbsp;multiplied&nbsp;by&nbsp;the&nbsp;factor</tt></dd></dl>
+ <dl><dt><a name="-NGon"><strong>NGon</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, sides<font color="#909090">=8</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;regular&nbsp;N-gon&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;vertex&nbsp;is&nbsp;at&nbsp;(r,0,0)&nbsp;relative&nbsp;to&nbsp;the&nbsp;location.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;N-gon&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius&nbsp;of&nbsp;the&nbsp;N-gon,&nbsp;ie.&nbsp;measured&nbsp;at&nbsp;the&nbsp;vertices<br>
+sides&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;sides&nbsp;on&nbsp;the&nbsp;N-gon<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;N-gon<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;N-gon&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-NGonPrism"><strong>NGonPrism</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, h<font color="#909090">=1.0</font>, sides<font color="#909090">=8</font>, open<font color="#909090">=False</font>)</dt><dd><tt>Draw&nbsp;an&nbsp;N-gon&nbsp;prism&nbsp;and&nbsp;return&nbsp;the&nbsp;correcponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;N-gon&nbsp;prism&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius&nbsp;of&nbsp;the&nbsp;N-gon,&nbsp;ie.&nbsp;measured&nbsp;at&nbsp;the&nbsp;vertices<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height<br>
+sides&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;sides&nbsp;to&nbsp;the&nbsp;N-gon&nbsp;ends&nbsp;of&nbsp;the&nbsp;prism<br>
+open&nbsp;&nbsp;--&nbsp;Leave&nbsp;the&nbsp;prism&nbsp;open&nbsp;at&nbsp;the&nbsp;ends?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise&nbsp;the&nbsp;ends&nbsp;are&nbsp;capped<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;N-gon&nbsp;prism&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-NormalizeV"><strong>NormalizeV</strong></a>(v<font color="#909090">=(1.0, 2.0, 3.0)</font>)</dt><dd><tt>Noralize&nbsp;the&nbsp;given&nbsp;vector<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v&nbsp;--&nbsp;The&nbsp;vector&nbsp;to&nbsp;normalize<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;normalized&nbsp;vector</tt></dd></dl>
+ <dl><dt><a name="-Percent"><strong>Percent</strong></a>(progress, final, bar_length<font color="#909090">=0</font>)</dt><dd><tt>Return&nbsp;a&nbsp;representation&nbsp;of&nbsp;percent&nbsp;progress<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+progress&nbsp;--&nbsp;The&nbsp;current&nbsp;progress<br>
+final&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;final&nbsp;progress&nbsp;value<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;percentage&nbsp;representation</tt></dd></dl>
+ <dl><dt><a name="-Pinion"><strong>Pinion</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, h<font color="#909090">=1.0</font>, tooth_depth<font color="#909090">=0.5</font>, file_depth<font color="#909090">=0.1</font>, num_teeth<font color="#909090">=12</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Create&nbsp;a&nbsp;pinion,&nbsp;suitable&nbsp;for&nbsp;a&nbsp;rack.<br>
+&nbsp;<br>
+The&nbsp;length&nbsp;of&nbsp;the&nbsp;rack&nbsp;extends&nbsp;along&nbsp;the&nbsp;X&nbsp;axis,&nbsp;and&nbsp;the&nbsp;teeth&nbsp;point&nbsp;up&nbsp;towards&nbsp;positive&nbsp;Z.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;pinion<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;pinion<br>
+tooth_depth&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;depth&nbsp;of&nbsp;the&nbsp;gear&nbsp;teeth<br>
+file_depth&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;amount&nbsp;to&nbsp;file&nbsp;off&nbsp;of&nbsp;each&nbsp;tooth<br>
+num_teeth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;teeth<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Plane"><strong>Plane</strong></a>(name<font color="#909090">=None</font>, location<font color="#909090">=(0, 0, 0)</font>, size<font color="#909090">=1.0</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;plane&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+The&nbsp;plane&nbsp;is&nbsp;2&nbsp;units&nbsp;by&nbsp;2&nbsp;units,&nbsp;extending&nbsp;one&nbsp;unit&nbsp;in&nbsp;each&nbsp;of&nbsp;the&nbsp;X,&nbsp;-X,&nbsp;Y&nbsp;and&nbsp;-Y&nbsp;directions<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;plane&nbsp;object<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;plane<br>
+size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;size&nbsp;factor&nbsp;to&nbsp;scale&nbsp;the&nbsp;plane&nbsp;with<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;plane&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-PositionPolar"><strong>PositionPolar</strong></a>(ob, r<font color="#909090">=1.0</font>, z_angle<font color="#909090">=0.0</font>, xy_angle<font color="#909090">=0.0</font>)</dt><dd><tt>Rotate&nbsp;and&nbsp;position&nbsp;an&nbsp;object,&nbsp;centered&nbsp;on&nbsp;the&nbsp;origin,&nbsp;using&nbsp;polar&nbsp;coordinates<br>
+&nbsp;<br>
+The&nbsp;object&nbsp;lies&nbsp;flat&nbsp;facing&nbsp;up&nbsp;along&nbsp;the&nbsp;Z+&nbsp;axis&nbsp;with&nbsp;the&nbsp;base<br>
+parallel&nbsp;to&nbsp;the&nbsp;Y&nbsp;axis&nbsp;on&nbsp;the&nbsp;X+&nbsp;side.<br>
+then&nbsp;is&nbsp;rotated&nbsp;so&nbsp;that&nbsp;its&nbsp;top&nbsp;face&nbsp;faces&nbsp;outward<br>
+from&nbsp;the&nbsp;imaginary&nbsp;sphere&nbsp;traced&nbsp;by&nbsp;the&nbsp;radius.<br>
+The&nbsp;center&nbsp;of&nbsp;the&nbsp;object&nbsp;will&nbsp;be&nbsp;positioned&nbsp;at&nbsp;the&nbsp;radius.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;position<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;to&nbsp;center&nbsp;the&nbsp;object&nbsp;on<br>
+z_angle&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;angle&nbsp;(rho)&nbsp;around&nbsp;the&nbsp;Z&nbsp;axis&nbsp;starting&nbsp;at&nbsp;the&nbsp;X+&nbsp;axis&nbsp;in&nbsp;the&nbsp;range&nbsp;0..360&nbsp;(or&nbsp;-180..180).<br>
+xy_angle&nbsp;&nbsp;--&nbsp;The&nbsp;angle&nbsp;(theta)&nbsp;above&nbsp;the&nbsp;xy&nbsp;plane&nbsp;in&nbsp;the&nbsp;Z+&nbsp;direction&nbsp;in&nbsp;the&nbsp;range&nbsp;-90..90<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Print"><strong>Print</strong></a>(msg)</dt><dd><tt>Append&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;*.log&nbsp;file<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+msg&nbsp;--&nbsp;The&nbsp;message&nbsp;to&nbsp;append<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-PrintV"><strong>PrintV</strong></a>(v, msg)</dt><dd><tt>Print&nbsp;a&nbsp;vector/point.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;vector/point&nbsp;to&nbsp;print<br>
+msg&nbsp;--&nbsp;The&nbsp;message&nbsp;to&nbsp;print<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-R"><strong>R</strong></a>(stroke_width<font color="#909090">=1.0</font>, height<font color="#909090">=10.0</font>, width<font color="#909090">=5.0</font>, thickness<font color="#909090">=0.1</font>)</dt><dd><tt>Create&nbsp;a&nbsp;3D&nbsp;letter&nbsp;R&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+stroke_width&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;character's&nbsp;strokes<br>
+height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;letter<br>
+width&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;letter<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Rack"><strong>Rack</strong></a>(name<font color="#909090">=None</font>, length<font color="#909090">=10.0</font>, width<font color="#909090">=1.0</font>, height<font color="#909090">=1.0</font>, tooth_height<font color="#909090">=0.5</font>, tooth_width<font color="#909090">=0.5</font>, file_depth<font color="#909090">=0.1</font>)</dt><dd><tt>Create&nbsp;a&nbsp;rack,&nbsp;suitable&nbsp;for&nbsp;a&nbsp;pinion.<br>
+&nbsp;<br>
+The&nbsp;length&nbsp;of&nbsp;the&nbsp;rack&nbsp;extends&nbsp;along&nbsp;the&nbsp;X&nbsp;axis,&nbsp;and&nbsp;the&nbsp;teeth&nbsp;point&nbsp;up&nbsp;towards&nbsp;positive&nbsp;Z.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;spring&nbsp;object<br>
+length&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;lenth&nbsp;of&nbsp;the&nbsp;rack<br>
+width&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;rack<br>
+height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;rack,&nbsp;including&nbsp;the&nbsp;teeth<br>
+tooth_height&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;each&nbsp;tooth<br>
+tooth_width&nbsp;&nbsp;--&nbsp;The&nbsp;width&nbsp;of&nbsp;each&nbsp;tooth,&nbsp;parallel&nbsp;to&nbsp;the&nbsp;rack's&nbsp;length<br>
+file_depth&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;amount&nbsp;to&nbsp;file&nbsp;off&nbsp;of&nbsp;each&nbsp;tooth<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-RadToDeg"><strong>RadToDeg</strong></a>(rad)</dt><dd><tt>Convert&nbsp;radians&nbsp;to&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+rad&nbsp;--&nbsp;The&nbsp;radians&nbsp;value&nbsp;to&nbsp;convert<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;equivalent&nbsp;angle,&nbsp;in&nbsp;degrees</tt></dd></dl>
+ <dl><dt><a name="-RainDrop"><strong>RainDrop</strong></a>(radius, center_to_tip, thickness)</dt><dd><tt>Draw&nbsp;a&nbsp;raindrop&nbsp;shape.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;rounded&nbsp;tip&nbsp;of&nbsp;the&nbsp;raindrop.<br>
+center_to_tip&nbsp;--&nbsp;The&nbsp;distance&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rounded&nbsp;tip&nbsp;to&nbsp;the&nbsp;sharp&nbsp;tip.<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;raindrop.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-RandomColor"><strong>RandomColor</strong></a>(min_r<font color="#909090">=0</font>, max_r<font color="#909090">=1.0</font>, min_g<font color="#909090">=0</font>, max_g<font color="#909090">=1.0</font>, min_b<font color="#909090">=0</font>, max_b<font color="#909090">=1.0</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;random&nbsp;color<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+min_r&nbsp;--&nbsp;The&nbsp;minimum&nbsp;red&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+max_r&nbsp;--&nbsp;The&nbsp;maximum&nbsp;red&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+min_g&nbsp;--&nbsp;The&nbsp;minimum&nbsp;green&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+max_g&nbsp;--&nbsp;The&nbsp;maximum&nbsp;green&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+min_b&nbsp;--&nbsp;The&nbsp;minimum&nbsp;blue&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+max_b&nbsp;--&nbsp;The&nbsp;maximum&nbsp;blue&nbsp;value,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;RGB&nbsp;color</tt></dd></dl>
+ <dl><dt><a name="-RandomPointInRectangularPrism"><strong>RandomPointInRectangularPrism</strong></a>(x<font color="#909090">=1</font>, y<font color="#909090">=2</font>, z<font color="#909090">=3</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;random&nbsp;point&nbsp;in&nbsp;a&nbsp;rectangular&nbsp;prism<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangular&nbsp;prism<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;random&nbsp;point&nbsp;(&nbsp;x,&nbsp;y,&nbsp;z&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-RandomPointInSphere"><strong>RandomPointInSphere</strong></a>(r<font color="#909090">=1.0</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;random&nbsp;point&nbsp;in&nbsp;a&nbsp;sphere<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;sphere<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangular&nbsp;prism<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;random&nbsp;point&nbsp;(&nbsp;x,&nbsp;y,&nbsp;z&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-RectangularCup"><strong>RectangularCup</strong></a>(name<font color="#909090">=None</font>, x<font color="#909090">=1</font>, y<font color="#909090">=2</font>, z<font color="#909090">=3</font>, x_thickness<font color="#909090">=0.1</font>, y_thickness<font color="#909090">=0.2</font>, z_thickness<font color="#909090">=0.3</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;cylindrical&nbsp;cup&nbsp;with&nbsp;a&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;the&nbsp;open&nbsp;end&nbsp;along&nbsp;the&nbsp;positive&nbsp;Z&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;cup&nbsp;object<br>
+x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+x_thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;wall&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y_thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;wall&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z_thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;wall&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tube</tt></dd></dl>
+ <dl><dt><a name="-RectangularPrism"><strong>RectangularPrism</strong></a>(name<font color="#909090">=None</font>, x<font color="#909090">=1</font>, y<font color="#909090">=2</font>, z<font color="#909090">=3</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;rectangular&nbsp;prism&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangular&nbsp;prism<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;rectangular&nbsp;prism&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Remesh"><strong>Remesh</strong></a>(ob, depth<font color="#909090">=1</font>)</dt><dd><tt>Remesh&nbsp;the&nbsp;object&nbsp;into&nbsp;roughly&nbsp;uniform&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object<br>
+depth&nbsp;--&nbsp;The&nbsp;depth&nbsp;of&nbsp;the&nbsp;remesh&nbsp;(#&nbsp;times&nbsp;to&nbsp;recursively&nbsp;remesh)<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateDeg"><strong>RotateDeg</strong></a>(ob, angle<font color="#909090">=0</font>, axis<font color="#909090">=(0, 0, 1.0)</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;using&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;to&nbsp;rotate&nbsp;around&nbsp;the&nbsp;axis,&nbsp;in&nbsp;degrees<br>
+axis&nbsp;&nbsp;--&nbsp;The&nbsp;axis&nbsp;to&nbsp;rotate&nbsp;the&nbsp;object&nbsp;around.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateDegX"><strong>RotateDegX</strong></a>(ob, angle<font color="#909090">=0</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;using&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;to&nbsp;rotate&nbsp;around&nbsp;the&nbsp;axis,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateDegY"><strong>RotateDegY</strong></a>(ob, angle<font color="#909090">=0</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;using&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;to&nbsp;rotate&nbsp;around&nbsp;the&nbsp;axis,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateDegZ"><strong>RotateDegZ</strong></a>(ob, angle<font color="#909090">=0</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;using&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;to&nbsp;rotate&nbsp;around&nbsp;the&nbsp;axis,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateRad"><strong>RotateRad</strong></a>(ob, angle, axis<font color="#909090">=(0, 0, 1.0)</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;about&nbsp;its&nbsp;origin<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;to&nbsp;rotate&nbsp;around&nbsp;the&nbsp;axis,&nbsp;in&nbsp;radians<br>
+axis&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;representing&nbsp;the&nbsp;axis&nbsp;to&nbsp;rotate&nbsp;the&nbsp;object&nbsp;around.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;the&nbsp;purposes&nbsp;of&nbsp;this&nbsp;rotation,&nbsp;the&nbsp;axis&nbsp;vector&nbsp;is&nbsp;translated&nbsp;so&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;begins&nbsp;at&nbsp;the&nbsp;origin&nbsp;of&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateRadZ"><strong>RotateRadZ</strong></a>(ob, angle)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;about&nbsp;the&nbsp;Z&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;rotate<br>
+angle&nbsp;--&nbsp;The&nbsp;angle&nbsp;of&nbsp;rotation,&nbsp;in&nbsp;radians<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RotateToV"><strong>RotateToV</strong></a>(ob, ob_normal<font color="#909090">=(0, 0, 1.0)</font>, v<font color="#909090">=(0, 0, 1.0)</font>)</dt><dd><tt>Rotate&nbsp;an&nbsp;object&nbsp;to&nbsp;the&nbsp;given&nbsp;vector<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;rotate<br>
+ob_normal&nbsp;--&nbsp;The&nbsp;object's&nbsp;normal&nbsp;vector<br>
+v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;to&nbsp;rotate&nbsp;to<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-RoundedRectangularPrism"><strong>RoundedRectangularPrism</strong></a>(name<font color="#909090">=None</font>, x<font color="#909090">=1</font>, y<font color="#909090">=2</font>, z<font color="#909090">=3</font>, z_r<font color="#909090">=0.1</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;rectangular&nbsp;prism&nbsp;with&nbsp;rounded&nbsp;edges&nbsp;in&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+z_r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;rounding&nbsp;parallel&nbsp;to&nbsp;the&nbsp;Z&nbsp;axis<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangular&nbsp;prism<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;rectangular&nbsp;prism&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-SaveSTL"><strong>SaveSTL</strong></a>(fn)</dt><dd><tt>Export&nbsp;all&nbsp;objects&nbsp;to&nbsp;an&nbsp;STL&nbsp;file<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+fn&nbsp;--&nbsp;The&nbsp;filename&nbsp;to&nbsp;export&nbsp;to<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Scale"><strong>Scale</strong></a>(ob, x, y, z)</dt><dd><tt>Scale&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;X-axis<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleAll"><strong>ScaleAll</strong></a>(x, y, z)</dt><dd><tt>Scale&nbsp;all&nbsp;objects<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;X-axis<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleAllUniform"><strong>ScaleAllUniform</strong></a>(f)</dt><dd><tt>Scale&nbsp;all&nbsp;objects&nbsp;uniformly&nbsp;in&nbsp;all&nbsp;3&nbsp;axes<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+f&nbsp;&nbsp;--&nbsp;The&nbsp;uniform&nbsp;scale&nbsp;factor<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleUniform"><strong>ScaleUniform</strong></a>(ob, f)</dt><dd><tt>Scale&nbsp;an&nbsp;object&nbsp;uniformly&nbsp;in&nbsp;all&nbsp;3&nbsp;axes<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+f&nbsp;&nbsp;--&nbsp;The&nbsp;uniform&nbsp;scale&nbsp;factor<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleV"><strong>ScaleV</strong></a>(ob, v<font color="#909090">=(1, 1, 1)</font>)</dt><dd><tt>Scale&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+v&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;of&nbsp;(x,y,z)&nbsp;scale&nbsp;factors<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleX"><strong>ScaleX</strong></a>(ob, x)</dt><dd><tt>Scale&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;X-axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;X-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleXY"><strong>ScaleXY</strong></a>(ob, xy)</dt><dd><tt>Scale&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+xy&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;both&nbsp;the&nbsp;X-axis&nbsp;and&nbsp;Y-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleY"><strong>ScaleY</strong></a>(ob, y)</dt><dd><tt>Scale&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ScaleZ"><strong>ScaleZ</strong></a>(ob, z)</dt><dd><tt>Scale&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;scale.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;scale&nbsp;factor&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Select"><strong>Select</strong></a>(ob, add<font color="#909090">=False</font>)</dt><dd><tt>Select&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;selection&nbsp;of&nbsp;the&nbsp;object&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;set&nbsp;up&nbsp;tranformations&nbsp;that&nbsp;only&nbsp;apply&nbsp;to&nbsp;that&nbsp;object.<br>
+In&nbsp;general,&nbsp;it&nbsp;is&nbsp;best&nbsp;to&nbsp;explicitly&nbsp;pass&nbsp;objects&nbsp;around&nbsp;_instead_&nbsp;of&nbsp;using&nbsp;<a href="#-Select">Select</a>(),&nbsp;but&nbsp;there<br>
+are&nbsp;some&nbsp;Blender&nbsp;operations&nbsp;that&nbsp;work&nbsp;better&nbsp;with&nbsp;the&nbsp;current&nbsp;selection,&nbsp;hence&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;select<br>
+add&nbsp;--&nbsp;Add&nbsp;the&nbsp;object&nbsp;to&nbsp;the&nbsp;current&nbsp;selection?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise,&nbsp;the&nbsp;object&nbsp;will&nbsp;be&nbsp;the&nbsp;only&nbsp;object&nbsp;selected.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SelectAll"><strong>SelectAll</strong></a>()</dt><dd><tt>Select&nbsp;all&nbsp;objects<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SelectFace"><strong>SelectFace</strong></a>(ob, face_num<font color="#909090">=0</font>)</dt><dd><tt>Select&nbsp;a&nbsp;specific&nbsp;face&nbsp;of&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;selection&nbsp;of&nbsp;the&nbsp;face&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;set&nbsp;up&nbsp;transformations&nbsp;that&nbsp;apply&nbsp;only&nbsp;to&nbsp;that&nbsp;face.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;containing&nbsp;the&nbsp;face<br>
+face_num&nbsp;&nbsp;--&nbsp;The&nbsp;zero-based&nbsp;face&nbsp;number&nbsp;to&nbsp;select<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SelectNone"><strong>SelectNone</strong></a>()</dt><dd><tt>Deselect&nbsp;all&nbsp;objects<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SelectVertex"><strong>SelectVertex</strong></a>(ob, vertex_num<font color="#909090">=0</font>)</dt><dd><tt>Select&nbsp;a&nbsp;specific&nbsp;vertex&nbsp;of&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;selection&nbsp;of&nbsp;the&nbsp;vertex&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;set&nbsp;up&nbsp;transformations&nbsp;that&nbsp;apply&nbsp;only&nbsp;to&nbsp;that&nbsp;vertex.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;containing&nbsp;the&nbsp;face<br>
+vertex_num&nbsp;&nbsp;--&nbsp;The&nbsp;zero-based&nbsp;vertex&nbsp;number&nbsp;to&nbsp;select<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetColor"><strong>SetColor</strong></a>(ob, rgb<font color="#909090">=None</font>)</dt><dd><tt>Set&nbsp;an&nbsp;object's&nbsp;color.&nbsp;If&nbsp;the&nbsp;ogject&nbsp;is&nbsp;None,&nbsp;set&nbsp;the&nbsp;current&nbsp;global&nbsp;color.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;as&nbsp;a&nbsp;side-effect,&nbsp;this&nbsp;function&nbsp;creates&nbsp;a&nbsp;new<br>
+Blender&nbsp;material&nbsp;with&nbsp;the&nbsp;color,&nbsp;called&nbsp;"&lt;object-name&gt;_color"<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;set&nbsp;the&nbsp;color&nbsp;of<br>
+rgb&nbsp;--&nbsp;A&nbsp;vector&nbsp;of&nbsp;(r,g,b)&nbsp;(red,green,blue)&nbsp;color&nbsp;intensities<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each&nbsp;value&nbsp;is&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetFN"><strong>SetFN</strong></a>(fn<font color="#909090">=32</font>)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;fineness&nbsp;setting<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+fn&nbsp;--&nbsp;The&nbsp;new&nbsp;fineness&nbsp;setting<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetOrigin"><strong>SetOrigin</strong></a>(ob, x, y, z)</dt><dd><tt>Set&nbsp;an&nbsp;object's&nbsp;origin<br>
+&nbsp;<br>
+The&nbsp;object's&nbsp;origin&nbsp;specifies&nbsp;the&nbsp;object's&nbsp;location.<br>
+During&nbsp;rotation,&nbsp;the&nbsp;object's&nbsp;origin&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;rotation&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;set&nbsp;the&nbsp;origin&nbsp;on<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;new&nbsp;X&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;origin<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;new&nbsp;Y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;origin<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;new&nbsp;Z&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;origin<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetOriginCenter"><strong>SetOriginCenter</strong></a>(ob)</dt><dd><tt>Set&nbsp;an&nbsp;object's&nbsp;origin&nbsp;to&nbsp;the&nbsp;bounding-box&nbsp;center<br>
+&nbsp;<br>
+The&nbsp;object's&nbsp;origin&nbsp;specifies&nbsp;the&nbsp;object's&nbsp;location.<br>
+During&nbsp;rotation,&nbsp;the&nbsp;object's&nbsp;origin&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;rotation&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;set&nbsp;the&nbsp;origin&nbsp;on<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetOriginOrigin"><strong>SetOriginOrigin</strong></a>(ob)</dt><dd><tt>Set&nbsp;an&nbsp;object's&nbsp;origin&nbsp;to&nbsp;the&nbsp;origin.<br>
+&nbsp;<br>
+The&nbsp;object's&nbsp;origin&nbsp;specifies&nbsp;the&nbsp;object's&nbsp;location.<br>
+During&nbsp;rotation,&nbsp;the&nbsp;object's&nbsp;origin&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;rotation&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;set&nbsp;the&nbsp;origin&nbsp;on<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetOriginV"><strong>SetOriginV</strong></a>(ob, v)</dt><dd><tt>Set&nbsp;an&nbsp;object's&nbsp;origin<br>
+&nbsp;<br>
+The&nbsp;object's&nbsp;origin&nbsp;specifies&nbsp;the&nbsp;object's&nbsp;location.<br>
+During&nbsp;rotation,&nbsp;the&nbsp;object's&nbsp;origin&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;rotation&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;set&nbsp;the&nbsp;origin&nbsp;on<br>
+v&nbsp;&nbsp;--&nbsp;The&nbsp;new&nbsp;coordinates&nbsp;of&nbsp;the&nbsp;object's&nbsp;origin<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SetTransformMetadata"><strong>SetTransformMetadata</strong></a>(transform_metadata<font color="#909090">=True</font>)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;transform_metadata&nbsp;setting<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+transform_metadata&nbsp;--&nbsp;The&nbsp;new&nbsp;transform_metadata&nbsp;setting<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ShowAll"><strong>ShowAll</strong></a>()</dt><dd><tt>Show&nbsp;all&nbsp;objects<br>
+&nbsp;<br>
+Adjust&nbsp;the&nbsp;Blender&nbsp;viewport&nbsp;to&nbsp;contain&nbsp;all&nbsp;objects,&nbsp;filling&nbsp;the&nbsp;frame&nbsp;with&nbsp;them.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+None<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-ShowFont"><strong>ShowFont</strong></a>(font)</dt><dd><tt>Show&nbsp;the&nbsp;font's&nbsp;characters&nbsp;in&nbsp;a&nbsp;grid<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+font&nbsp;--&nbsp;The&nbsp;file-system&nbsp;path&nbsp;to&nbsp;the&nbsp;font&nbsp;to&nbsp;render&nbsp;the&nbsp;characters&nbsp;with<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Sin"><strong>Sin</strong></a>(theta)</dt><dd><tt>Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;an&nbsp;angle&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+theta&nbsp;--&nbsp;The&nbsp;angle,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;the&nbsp;angle</tt></dd></dl>
+ <dl><dt><a name="-Snowflake"><strong>Snowflake</strong></a>(ob, radius<font color="#909090">=1.0</font>)</dt><dd><tt>Create&nbsp;a&nbsp;snowflake&nbsp;from&nbsp;the&nbsp;given&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;use&nbsp;as&nbsp;one&nbsp;half&nbsp;arm&nbsp;of&nbsp;the&nbsp;snowflake<br>
+radius&nbsp;--&nbsp;The&nbsp;distance&nbsp;to&nbsp;push&nbsp;ob&nbsp;away&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;snowflake<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;ob&nbsp;will&nbsp;be&nbsp;copied&nbsp;and&nbsp;positioned&nbsp;at&nbsp;the&nbsp;origin&nbsp;to&nbsp;begin&nbsp;the&nbsp;snowflake.<br>
+The&nbsp;first&nbsp;arm&nbsp;is&nbsp;moved&nbsp;in&nbsp;the&nbsp;positive&nbsp;X-axis&nbsp;direction.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;snowflake&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-SocketJoint"><strong>SocketJoint</strong></a>(ball_radius<font color="#909090">=10.0</font>, socket_thickness<font color="#909090">=2.0</font>, socket_finger_gap<font color="#909090">=4.0</font>, socket_finger_base_offset<font color="#909090">=5.0</font>, socket_finger_tip_offset<font color="#909090">=5.0</font>, stem_height<font color="#909090">=10.0</font>, stem_radius<font color="#909090">=2.0</font>, center_in_socket<font color="#909090">=False</font>)</dt><dd><tt>Create&nbsp;a&nbsp;socket&nbsp;of&nbsp;a&nbsp;ball-and-socket&nbsp;joint.<br>
+&nbsp;<br>
+The&nbsp;socket&nbsp;points&nbsp;up&nbsp;in&nbsp;the&nbsp;Z&nbsp;axis&nbsp;relative&nbsp;to&nbsp;the&nbsp;origin.<br>
+The&nbsp;bottom&nbsp;of&nbsp;the&nbsp;stem&nbsp;is&nbsp;at&nbsp;the&nbsp;origin.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ball_radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;ball<br>
+socket_thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;socket&nbsp;wall<br>
+socket_finger_gap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;space&nbsp;between&nbsp;the&nbsp;four&nbsp;"fingers"&nbsp;of&nbsp;the&nbsp;socket<br>
+socket_finger_base_offset&nbsp;--&nbsp;The&nbsp;offset&nbsp;of&nbsp;the&nbsp;finger&nbsp;base&nbsp;downwards&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;socket<br>
+socket_finger_tip_offset&nbsp;&nbsp;--&nbsp;The&nbsp;offset&nbsp;of&nbsp;the&nbsp;finger&nbsp;tips,&nbsp;upwards&nbsp;from&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;socket<br>
+stem_height&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+stem_radius&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;stem&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;socket<br>
+center_in_socket&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Put&nbsp;the&nbsp;object&nbsp;center&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;socket,&nbsp;else&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;stem<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;socket&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Sphere"><strong>Sphere</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1</font>, segments<font color="#909090">=None</font>, rings<font color="#909090">=None</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;sphere&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;sphere&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius<br>
+segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertical&nbsp;segments&nbsp;(like&nbsp;beach-ball&nbsp;panels)<br>
+rings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;rings&nbsp;(horizontal&nbsp;slices)<br>
+location&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;sphere<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;sphere&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-SphericalText"><strong>SphericalText</strong></a>(text<font color="#909090">='Abc123'</font>, font<font color="#909090">=None</font>, r<font color="#909090">=1</font>, thickness<font color="#909090">=0.05</font>, angular_height<font color="#909090">=30</font>, r_offset<font color="#909090">=0</font>, subdivide<font color="#909090">=1</font>, spacer_deg<font color="#909090">=4</font>)</dt><dd><tt>Draw&nbsp;solid,&nbsp;spherical&nbsp;text&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;character&nbsp;of&nbsp;the&nbsp;text&nbsp;is&nbsp;rendered&nbsp;near&nbsp;(r,0,0).<br>
+The&nbsp;text&nbsp;is&nbsp;readable&nbsp;when&nbsp;the&nbsp;positive&nbsp;Z-axis&nbsp;extends&nbsp;up.<br>
+The&nbsp;equator&nbsp;of&nbsp;the&nbsp;sphere&nbsp;is&nbsp;halfway&nbsp;between&nbsp;the&nbsp;topmost&nbsp;character&nbsp;extent&nbsp;and&nbsp;the&nbsp;bottommost&nbsp;character&nbsp;extent.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+text&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;text&nbsp;to&nbsp;draw<br>
+font&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius&nbsp;of&nbsp;the&nbsp;text<br>
+thickness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;text<br>
+angular_height&nbsp;--&nbsp;The&nbsp;angular&nbsp;height&nbsp;of&nbsp;the&nbsp;text,&nbsp;in&nbsp;degrees&nbsp;up&nbsp;from&nbsp;the&nbsp;equator&nbsp;of&nbsp;the&nbsp;sphere<br>
+r_offset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radial&nbsp;offset,&nbsp;in&nbsp;degrees.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Positive&nbsp;values&nbsp;rorate&nbsp;the&nbsp;text&nbsp;towards&nbsp;the&nbsp;top&nbsp;of&nbsp;the&nbsp;sphere.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Negative&nbsp;values&nbsp;rorate&nbsp;the&nbsp;text&nbsp;towards&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;sphere.<br>
+subdivide&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;subdivisions.&nbsp;Higher&nbsp;numbers&nbsp;mean&nbsp;more,&nbsp;smaller&nbsp;faces<br>
+spacer_deg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;spacer&nbsp;degrees&nbsp;between&nbsp;characters<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;spherical&nbsp;text&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-SpiralPointsOnSphere"><strong>SpiralPointsOnSphere</strong></a>(r<font color="#909090">=1</font>, num_loops<font color="#909090">=3</font>, points_per_loop<font color="#909090">=10</font>, clockwise<font color="#909090">=False</font>)</dt><dd><tt>Return&nbsp;an&nbsp;array&nbsp;of&nbsp;3D&nbsp;points&nbsp;that&nbsp;spiral&nbsp;around&nbsp;a&nbsp;sphere&nbsp;from&nbsp;pole&nbsp;to&nbsp;pole.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;sphere<br>
+num_loops&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;360-degree&nbsp;loops&nbsp;in&nbsp;the&nbsp;spiral<br>
+points_per_loop&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;points&nbsp;per&nbsp;loop<br>
+clockwise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Use&nbsp;clockwise&nbsp;traversal?&nbsp;(set&nbsp;to&nbsp;False&nbsp;for&nbsp;counter-clockwise)<br>
+&nbsp;<br>
+return&nbsp;the&nbsp;array&nbsp;of&nbsp;points&nbsp;(size&nbsp;is&nbsp;num_loops&nbsp;x&nbsp;points_per_loop)</tt></dd></dl>
+ <dl><dt><a name="-Spring"><strong>Spring</strong></a>(name<font color="#909090">=None</font>, major_radius<font color="#909090">=1.0</font>, major_segments<font color="#909090">=10</font>, minor_radius<font color="#909090">=0.1</font>, minor_segments<font color="#909090">=10</font>, rise<font color="#909090">=1.0</font>, turns<font color="#909090">=5</font>, capped<font color="#909090">=1</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;spring<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;spring&nbsp;object<br>
+major_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;spring,&nbsp;to&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle<br>
+major_segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;segments&nbsp;making&nbsp;a&nbsp;full&nbsp;turn&nbsp;of&nbsp;the&nbsp;spring<br>
+minor_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle&nbsp;forming&nbsp;the&nbsp;spring<br>
+minor_segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;segments&nbsp;in&nbsp;each&nbsp;circular&nbsp;cross-section&nbsp;(default&nbsp;is&nbsp;from&nbsp;Blender)<br>
+rise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;rise&nbsp;between&nbsp;each&nbsp;full&nbsp;turn<br>
+turns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;full&nbsp;turns&nbsp;in&nbsp;the&nbsp;spring<br>
+capped&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Capped&nbsp;ends?&nbsp;(0=No,&nbsp;1=flat,&nbsp;2=sphere)<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;spring<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;spring&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Square"><strong>Square</strong></a>(name<font color="#909090">=None</font>, size<font color="#909090">=1.0</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;square&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;N-gon&nbsp;object<br>
+size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;sides<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;square<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;square&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-SubV"><strong>SubV</strong></a>(v1<font color="#909090">=(0, 0, 0)</font>, v2<font color="#909090">=(1, 1, 1)</font>)</dt><dd><tt>Subtract&nbsp;one&nbsp;vector&nbsp;from&nbsp;another<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+v1&nbsp;--&nbsp;The&nbsp;first&nbsp;vector<br>
+v2&nbsp;--&nbsp;The&nbsp;second&nbsp;vector<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;difference&nbsp;of&nbsp;v1&nbsp;minus&nbsp;v2</tt></dd></dl>
+ <dl><dt><a name="-Subdivide"><strong>Subdivide</strong></a>(ob, times<font color="#909090">=1</font>, fractal<font color="#909090">=0</font>, fractal_along_normal<font color="#909090">=1</font>, seed<font color="#909090">=1</font>)</dt><dd><tt>Subdivide&nbsp;the&nbsp;object's&nbsp;faces&nbsp;into&nbsp;smaller&nbsp;areas<br>
+&nbsp;<br>
+Subdivision&nbsp;is&nbsp;sometimes&nbsp;required&nbsp;for&nbsp;CSG&nbsp;(Constructive&nbsp;Solid&nbsp;Geometry)&nbsp;operations<br>
+to&nbsp;succeed&nbsp;and/or&nbsp;look&nbsp;reasonable.<br>
+&nbsp;<br>
+Use&nbsp;fractal&nbsp;subdivision&nbsp;to&nbsp;create&nbsp;rough&nbsp;textures&nbsp;on&nbsp;object&nbsp;faces<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;subdivide<br>
+times&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;times&nbsp;to&nbsp;subdivide,&nbsp;as&nbsp;an&nbsp;integer<br>
+fractal&nbsp;--&nbsp;The&nbsp;fractal&nbsp;deformation&nbsp;factor&nbsp;to&nbsp;apply&nbsp;to&nbsp;the&nbsp;subdivision<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;value&nbsp;of&nbsp;zero&nbsp;(0)&nbsp;causes&nbsp;subdivision&nbsp;to&nbsp;have&nbsp;uniform&nbsp;faces&nbsp;that&nbsp;remain&nbsp;in&nbsp;the&nbsp;plane&nbsp;of&nbsp;the&nbsp;original&nbsp;face.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;non-zero&nbsp;value&nbsp;causes&nbsp;subdivision&nbsp;to&nbsp;have&nbsp;maximally&nbsp;jagged&nbsp;faces&nbsp;that&nbsp;extend&nbsp;above&nbsp;and&nbsp;below&nbsp;the&nbsp;plane&nbsp;of&nbsp;the&nbsp;face.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;larger&nbsp;the&nbsp;value,&nbsp;the&nbsp;higher&nbsp;and&nbsp;deeper&nbsp;the&nbsp;deformation.<br>
+fractal_along_normal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;When&nbsp;set&nbsp;to&nbsp;one&nbsp;(1),&nbsp;move&nbsp;vertices&nbsp;along&nbsp;their&nbsp;normals&nbsp;when&nbsp;doing&nbsp;a&nbsp;fractal&nbsp;subdivision.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;set&nbsp;to&nbsp;zero&nbsp;(0),&nbsp;move&nbsp;vertices&nbsp;in&nbsp;random&nbsp;directions&nbsp;when&nbsp;doing&nbsp;a&nbsp;fractal&nbsp;subdivision.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;value&nbsp;of&nbsp;zero&nbsp;is&nbsp;more&nbsp;likely&nbsp;to&nbsp;lead&nbsp;to&nbsp;a&nbsp;very&nbsp;spiky&nbsp;object&nbsp;that&nbsp;may&nbsp;not&nbsp;be&nbsp;a&nbsp;valid&nbsp;CSG&nbsp;object.<br>
+seed&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;random&nbsp;seed&nbsp;value&nbsp;to&nbsp;use&nbsp;when&nbsp;fractal&nbsp;is&nbsp;non-zero.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;same&nbsp;(fractal,fractal_along_normal,seed)&nbsp;values&nbsp;will&nbsp;always&nbsp;result&nbsp;in&nbsp;the&nbsp;same&nbsp;result&nbsp;on&nbsp;the&nbsp;same&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-SubdivideFractal"><strong>SubdivideFractal</strong></a>(ob, fractal<font color="#909090">=1</font>, times<font color="#909090">=5</font>, seed<font color="#909090">=1</font>)</dt><dd><tt>Subdivide&nbsp;an&nbsp;object&nbsp;using&nbsp;a&nbsp;fractal&nbsp;deformation<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;just&nbsp;a&nbsp;convenience&nbsp;function&nbsp;on&nbsp;top&nbsp;of&nbsp;<a href="#-Subdivide">Subdivide</a>()<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;subdivide<br>
+fractal&nbsp;--&nbsp;The&nbsp;fractal&nbsp;factor&nbsp;to&nbsp;apply&nbsp;to&nbsp;the&nbsp;subdivision,&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;value&nbsp;of&nbsp;zero&nbsp;(0)&nbsp;causes&nbsp;subdivision&nbsp;to&nbsp;have&nbsp;uniform&nbsp;faces&nbsp;that&nbsp;remain&nbsp;in&nbsp;the&nbsp;plane&nbsp;of&nbsp;the&nbsp;face.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;value&nbsp;of&nbsp;one&nbsp;(1)&nbsp;causes&nbsp;subdivision&nbsp;to&nbsp;have&nbsp;maximally&nbsp;jagged&nbsp;faces&nbsp;that&nbsp;extend&nbsp;above&nbsp;and&nbsp;below&nbsp;the&nbsp;plane&nbsp;of&nbsp;the&nbsp;face.<br>
+times&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;times&nbsp;to&nbsp;subdivide,&nbsp;as&nbsp;an&nbsp;integer<br>
+seed&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;random&nbsp;seed&nbsp;value&nbsp;to&nbsp;use&nbsp;when&nbsp;fractal&nbsp;is&nbsp;non-zero.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;same&nbsp;(fractal,fractal_along_normal,seed)&nbsp;values&nbsp;will&nbsp;always&nbsp;result&nbsp;in&nbsp;the&nbsp;same&nbsp;result&nbsp;on&nbsp;the&nbsp;same&nbsp;object.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-Tan"><strong>Tan</strong></a>(theta)</dt><dd><tt>Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;an&nbsp;angle&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+theta&nbsp;--&nbsp;The&nbsp;angle,&nbsp;in&nbsp;degrees<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;the&nbsp;angle</tt></dd></dl>
+ <dl><dt><a name="-Text"><strong>Text</strong></a>(name<font color="#909090">=None</font>, text<font color="#909090">='abc123'</font>, h<font color="#909090">=1</font>, font<font color="#909090">=None</font>, align<font color="#909090">='LEFT'</font>, bevel_depth<font color="#909090">=0.0</font>, location<font color="#909090">=(0, 0, 0)</font>, center<font color="#909090">=True</font>, subdivide<font color="#909090">=1</font>)</dt><dd><tt>Draw&nbsp;some&nbsp;solid&nbsp;text&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+The&nbsp;text&nbsp;can&nbsp;be&nbsp;read&nbsp;looking&nbsp;down&nbsp;from&nbsp;the&nbsp;positive&nbsp;Z-axis,&nbsp;looking&nbsp;towards&nbsp;the&nbsp;origin.<br>
+The&nbsp;text&nbsp;starts&nbsp;in&nbsp;the&nbsp;negative&nbsp;X-axis&nbsp;and&nbsp;ends&nbsp;in&nbsp;the&nbsp;positive&nbsp;X-axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+text&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;text&nbsp;to&nbsp;draw<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;text<br>
+font&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text<br>
+align&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;horizontal&nbsp;alignment&nbsp;of&nbsp;the&nbsp;text.&nbsp;Can&nbsp;be&nbsp;one&nbsp;of:&nbsp;LEFT,&nbsp;CENTER,&nbsp;RIGHT<br>
+bevel_depth&nbsp;--&nbsp;The&nbsp;bevel&nbsp;depth&nbsp;along&nbsp;the&nbsp;character&nbsp;edges<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;start&nbsp;(or&nbsp;center&nbsp;when&nbsp;center=True)&nbsp;of&nbsp;the&nbsp;text<br>
+center&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Center&nbsp;the&nbsp;text?&nbsp;Otherwise&nbsp;start&nbsp;the&nbsp;text&nbsp;at&nbsp;the&nbsp;given&nbsp;location<br>
+subdivide&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;subdivisions.&nbsp;Higher&nbsp;numbers&nbsp;mean&nbsp;more,&nbsp;smaller&nbsp;faces<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;text&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-TextMetrics"><strong>TextMetrics</strong></a>(text<font color="#909090">='abc123'</font>, font<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;an&nbsp;array&nbsp;of&nbsp;hashes&nbsp;of&nbsp;metrics,&nbsp;corresponding&nbsp;to&nbsp;each&nbsp;character&nbsp;of&nbsp;text,&nbsp;as&nbsp;rendered&nbsp;in&nbsp;the&nbsp;given&nbsp;font<br>
+&nbsp;<br>
+When&nbsp;calculating&nbsp;the&nbsp;metrics,&nbsp;each&nbsp;character&nbsp;is&nbsp;rendered&nbsp;in&nbsp;the&nbsp;default&nbsp;font&nbsp;size,&nbsp;positioned&nbsp;at&nbsp;the&nbsp;origin.<br>
+The&nbsp;primary&nbsp;use&nbsp;of&nbsp;the&nbsp;metrics&nbsp;is&nbsp;for&nbsp;the&nbsp;height-to-width&nbsp;ratio&nbsp;and&nbsp;baseline&nbsp;offset&nbsp;ratio,&nbsp;so&nbsp;the&nbsp;font&nbsp;size&nbsp;used&nbsp;doesn't&nbsp;really&nbsp;matter.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+text&nbsp;--&nbsp;The&nbsp;text<br>
+font&nbsp;--&nbsp;The&nbsp;file-system&nbsp;path&nbsp;to&nbsp;the&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text&nbsp;(default&nbsp;Blender&nbsp;current&nbsp;font)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;array&nbsp;with&nbsp;each&nbsp;element&nbsp;being&nbsp;a&nbsp;hash&nbsp;object,&nbsp;with&nbsp;the&nbsp;following&nbsp;values&nbsp;defined:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Minimum&nbsp;width&nbsp;(X-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Maximum&nbsp;width&nbsp;(X-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Minimum&nbsp;height&nbsp;(Y-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;Maximum&nbsp;height&nbsp;(Y-axis)&nbsp;extent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;baseline_offset_h&nbsp;--&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;bottom&nbsp;extent&nbsp;relative&nbsp;to&nbsp;the&nbsp;character&nbsp;baseline</tt></dd></dl>
+ <dl><dt><a name="-Torus"><strong>Torus</strong></a>(name<font color="#909090">=None</font>, major_radius<font color="#909090">=1</font>, minor_radius<font color="#909090">=0.25</font>, major_segments<font color="#909090">=None</font>, minor_segments<font color="#909090">=None</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid&nbsp;torus&nbsp;in&nbsp;the&nbsp;XY&nbsp;plane&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;torus&nbsp;object<br>
+major_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;to&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle&nbsp;forming&nbsp;the&nbsp;torus<br>
+minor_radius&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;radius&nbsp;of&nbsp;the&nbsp;extruded&nbsp;circle&nbsp;forming&nbsp;the&nbsp;torus<br>
+major_segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;segments&nbsp;having&nbsp;a&nbsp;circular&nbsp;cross-section&nbsp;(default&nbsp;is&nbsp;from&nbsp;Blender)<br>
+minor_segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;segments&nbsp;in&nbsp;each&nbsp;circular&nbsp;cross-section&nbsp;(default&nbsp;is&nbsp;from&nbsp;Blender)<br>
+location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;torus<br>
+&nbsp;<br>
+return&nbsp;the&nbsp;torus&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Translate"><strong>Translate</strong></a>(ob, x, y, z)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;distange&nbsp;to&nbsp;translate&nbsp;along&nbsp;the&nbsp;X-axis<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;distange&nbsp;to&nbsp;translate&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;distange&nbsp;to&nbsp;translate&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateTo"><strong>TranslateTo</strong></a>(ob, x, y, z)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object&nbsp;to&nbsp;the&nbsp;given&nbsp;point<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;new&nbsp;location<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;new&nbsp;location<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;z&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;object's&nbsp;new&nbsp;location<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateToV"><strong>TranslateToV</strong></a>(ob, v<font color="#909090">=(1, 1, 1)</font>)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object's&nbsp;origin&nbsp;to&nbsp;the&nbsp;given&nbsp;point<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+v&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;coordinate&nbsp;to&nbsp;move&nbsp;the&nbsp;object's&nbsp;origin&nbsp;to.<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateV"><strong>TranslateV</strong></a>(ob, v)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+v&nbsp;&nbsp;--&nbsp;The&nbsp;vector&nbsp;of&nbsp;(x,y,z)&nbsp;distances&nbsp;to&nbsp;translate&nbsp;by<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateX"><strong>TranslateX</strong></a>(ob, x)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;X&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+x&nbsp;&nbsp;--&nbsp;The&nbsp;distance&nbsp;to&nbsp;move&nbsp;the&nbsp;object&nbsp;along&nbsp;the&nbsp;X-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateY"><strong>TranslateY</strong></a>(ob, y)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;Y&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+y&nbsp;&nbsp;--&nbsp;The&nbsp;distance&nbsp;to&nbsp;move&nbsp;the&nbsp;object&nbsp;along&nbsp;the&nbsp;Y-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TranslateZ"><strong>TranslateZ</strong></a>(ob, z)</dt><dd><tt>Translate&nbsp;(move)&nbsp;an&nbsp;object&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object&nbsp;to&nbsp;translate.&nbsp;None&nbsp;means&nbsp;the&nbsp;currently-selected&nbsp;object.<br>
+z&nbsp;&nbsp;--&nbsp;The&nbsp;distance&nbsp;to&nbsp;move&nbsp;the&nbsp;object&nbsp;along&nbsp;the&nbsp;Z-axis<br>
+&nbsp;<br>
+Return&nbsp;nothing</tt></dd></dl>
+ <dl><dt><a name="-TriangleV"><strong>TriangleV</strong></a>(name<font color="#909090">=None</font>, v1<font color="#909090">=(0, 0, 0)</font>, v2<font color="#909090">=(0, 1, 0)</font>, v3<font color="#909090">=(0, 0, 1)</font>)</dt><dd><tt>Draw&nbsp;an&nbsp;N-gon&nbsp;prism&nbsp;and&nbsp;return&nbsp;the&nbsp;correcponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;triangle&nbsp;object<br>
+v1&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;first&nbsp;vertex&nbsp;in&nbsp;the&nbsp;triangle<br>
+v2&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;second&nbsp;vertex&nbsp;in&nbsp;the&nbsp;triangle<br>
+v3&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;third&nbsp;vertex&nbsp;in&nbsp;the&nbsp;triangle<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;mesh&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-TriangularPrism"><strong>TriangularPrism</strong></a>(name<font color="#909090">=None</font>, base<font color="#909090">=2.0</font>, height<font color="#909090">=1.5</font>, depth<font color="#909090">=0.5</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Create&nbsp;a&nbsp;triangular&nbsp;prism,&nbsp;with&nbsp;the&nbsp;base&nbsp;along&nbsp;the&nbsp;X&nbsp;axis,&nbsp;and&nbsp;the&nbsp;top&nbsp;towards&nbsp;positive&nbsp;Y.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;N-gon&nbsp;object<br>
+base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;base&nbsp;of&nbsp;the&nbsp;triangle<br>
+height&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;triangle<br>
+depth&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;vertical&nbsp;depth&nbsp;of&nbsp;the&nbsp;prism.<br>
+location&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;N-gon<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;triangular&nbsp;prism&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Tube"><strong>Tube</strong></a>(name<font color="#909090">=None</font>, r<font color="#909090">=1.0</font>, h<font color="#909090">=1.0</font>, thickness<font color="#909090">=0.5</font>, vertices<font color="#909090">=None</font>, location<font color="#909090">=(0, 0, 0)</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;solid,&nbsp;cylindrical&nbsp;tube&nbsp;with&nbsp;the&nbsp;height&nbsp;along&nbsp;the&nbsp;Z&nbsp;axis&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;tube&nbsp;object<br>
+r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;outer&nbsp;radius<br>
+h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;height<br>
+thickness&nbsp;--&nbsp;The&nbsp;thickness&nbsp;of&nbsp;the&nbsp;tube&nbsp;wall<br>
+vertices&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;vertices&nbsp;to&nbsp;use&nbsp;in&nbsp;the&nbsp;polygon&nbsp;approximation&nbsp;of&nbsp;the&nbsp;circle.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;to&nbsp;None&nbsp;to&nbsp;use&nbsp;the&nbsp;current&nbsp;default.<br>
+location&nbsp;&nbsp;--&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tube<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;tube&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-Union"><strong>Union</strong></a>(ob1, ob2, delete<font color="#909090">=False</font>)</dt><dd><tt>Union&nbsp;ob1&nbsp;and&nbsp;ob2<br>
+&nbsp;<br>
+WARNING!&nbsp;This&nbsp;operation&nbsp;can&nbsp;take&nbsp;a&nbsp;LONG&nbsp;time&nbsp;with&nbsp;complex&nbsp;objects!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;strongly&nbsp;suggested&nbsp;you&nbsp;minimize&nbsp;the&nbsp;number&nbsp;of&nbsp;calls&nbsp;made&nbsp;to&nbsp;this&nbsp;function.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;can&nbsp;affort&nbsp;the&nbsp;extra&nbsp;faces,&nbsp;consider&nbsp;using&nbsp;<a href="#-Join">Join</a>()&nbsp;instead.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;can&nbsp;fail&nbsp;if&nbsp;vertices&nbsp;and/or&nbsp;faces&nbsp;are&nbsp;within&nbsp;Blender's&nbsp;tolerances<br>
+for&nbsp;points&nbsp;being&nbsp;too&nbsp;close.&nbsp;Consider&nbsp;scaling&nbsp;the&nbsp;object&nbsp;by&nbsp;a&nbsp;factor&nbsp;of&nbsp;10&nbsp;or&nbsp;100<br>
+before&nbsp;calling&nbsp;this&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob1&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;left-hand&nbsp;operand<br>
+ob2&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;right-hand&nbsp;operand<br>
+delete&nbsp;--&nbsp;Delete&nbsp;ob2&nbsp;after&nbsp;the&nbsp;operation?<br>
+&nbsp;<br>
+Return&nbsp;an&nbsp;object&nbsp;consisting&nbsp;of&nbsp;the&nbsp;solid&nbsp;spaces&nbsp;that&nbsp;occur&nbsp;in&nbsp;either&nbsp;ob1&nbsp;or&nbsp;ob2</tt></dd></dl>
+ <dl><dt><a name="-Vector"><strong>Vector</strong></a>(p1<font color="#909090">=(0, 0, 0)</font>, p2<font color="#909090">=(1, 1, 1)</font>)</dt><dd><tt>Return&nbsp;the&nbsp;cross&nbsp;vector&nbsp;from&nbsp;p1&nbsp;to&nbsp;p2<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+p1&nbsp;--&nbsp;The&nbsp;first&nbsp;point<br>
+p2&nbsp;--&nbsp;The&nbsp;second&nbsp;point<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;vector&nbsp;from&nbsp;p1&nbsp;to&nbsp;p2</tt></dd></dl>
+ <dl><dt><a name="-VertexCount"><strong>VertexCount</strong></a>(ob)</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;vertices&nbsp;in&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;number&nbsp;of&nbsp;vertices</tt></dd></dl>
+ <dl><dt><a name="-VertexInfo"><strong>VertexInfo</strong></a>(ob, vert_index)</dt><dd><tt>Return&nbsp;the&nbsp;information&nbsp;for&nbsp;the&nbsp;given&nbsp;object's&nbsp;vertex<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;object<br>
+vert_index&nbsp;--&nbsp;The&nbsp;vertex&nbsp;index,&nbsp;origin&nbsp;zero<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;vertex&nbsp;information,&nbsp;as&nbsp;follows:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;global_position,&nbsp;normal&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-Vertices"><strong>Vertices</strong></a>(ob)</dt><dd><tt>Return&nbsp;the&nbsp;vertices&nbsp;of&nbsp;the&nbsp;object&nbsp;as&nbsp;an&nbsp;array<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+ob&nbsp;--&nbsp;The&nbsp;object<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;array&nbsp;of&nbsp;vertices</tt></dd></dl>
+ <dl><dt><a name="-ZigZag"><strong>ZigZag</strong></a>(name<font color="#909090">=None</font>, segments<font color="#909090">=5</font>, angle_max<font color="#909090">=30.0</font>, x1<font color="#909090">=0</font>, y1<font color="#909090">=0</font>, x2<font color="#909090">=1</font>, y2<font color="#909090">=1</font>)</dt><dd><tt>Draw&nbsp;a&nbsp;random&nbsp;zigag&nbsp;path&nbsp;of&nbsp;line&nbsp;segments&nbsp;from&nbsp;(x1,y1,0)&nbsp;to&nbsp;(x2,y2,0)&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;object<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;name&nbsp;for&nbsp;the&nbsp;new&nbsp;zigzag&nbsp;object<br>
+segments&nbsp;&nbsp;--&nbsp;The&nbsp;number&nbsp;of&nbsp;line&nbsp;segments<br>
+angle_max&nbsp;--&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;degrees&nbsp;to&nbsp;zig&nbsp;or&nbsp;zag&nbsp;between&nbsp;each&nbsp;segment<br>
+x1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;starting&nbsp;X&nbsp;coordinate<br>
+y1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;starting&nbsp;y&nbsp;coordinate<br>
+x2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;ending&nbsp;X&nbsp;coordinate<br>
+y2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;The&nbsp;ending&nbsp;y&nbsp;coordinate<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;zigzag&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-random"><strong>random</strong></a>(...)</dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Black</strong> = (0.0, 0.0, 0.0)<br>
+<strong>Blue</strong> = (0.0, 0.0, 1.0)<br>
+<strong>Brown</strong> = (0.545098039216, 0.270588235294, 0.0745098039216)<br>
+<strong>Colors</strong> = [(1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0), (1.0, 1.0, 1.0), (0.0, 0.0, 0.0), (0.5, 0.5, 0.5), (0.0, 1.0, 1.0), (1.0, 0.0, 1.0), (1.0, 1.0, 0.0), (1.0, 0.647058823529, 0.0), (0.545098039216, 0, 0.545098039216), (1.0, 0.411764705882, 0.705882352941), (0.545098039216, 0.270588235294, 0.0745098039216)]<br>
+<strong>Cyan</strong> = (0.0, 1.0, 1.0)<br>
+<strong>Green</strong> = (0.0, 1.0, 0.0)<br>
+<strong>Grey</strong> = (0.5, 0.5, 0.5)<br>
+<strong>Magenta</strong> = (1.0, 0.0, 1.0)<br>
+<strong>Orange</strong> = (1.0, 0.647058823529, 0.0)<br>
+<strong>Pink</strong> = (1.0, 0.411764705882, 0.705882352941)<br>
+<strong>Purple</strong> = (0.545098039216, 0, 0.545098039216)<br>
+<strong>Red</strong> = (1.0, 0.0, 0.0)<br>
+<strong>White</strong> = (1.0, 1.0, 1.0)<br>
+<strong>Yellow</strong> = (1.0, 1.0, 0.0)<br>
+<strong>russbpy_color</strong> = (0.0, 1.0, 0.0)<br>
+<strong>russbpy_fn</strong> = 32<br>
+<strong>russbpy_last_time</strong> = 0<br>
+<strong>russbpy_modnum_gen</strong> = 1<br>
+<strong>russbpy_quiet</strong> = False<br>
+<strong>russbpy_start_time</strong> = 0<br>
+<strong>russbpy_transform_metatdata</strong> = False</td></tr></table>
+</body></html>
