@@ -876,6 +876,33 @@ def Cylinder( name=None, r=1.0, h=1.0, vertices=None, cap=True, location=(0,0,0)
     Subdivide( ob )	# This steps helps with Boolean operations.
     return( ob )
 
+def Pie3D( name=None, r=1.0, h=1.0, angle=30.0, vertices=None, location=(0,0,0) ):
+    """Draw a cylindrical pie slice  with the height along the Z axis and return the corresponding object
+
+    Keyword arguments:
+    name     -- The name for the new cylinder object
+    r        -- The radius
+    h        -- The height
+    angle    -- The angle of the pie slice
+    vertices -- The number of vertices to use in the polygon approximation of the circle
+    location -- The location of the center of the cylinder
+
+    Return the pie object
+    """
+
+    ob = Cylinder( name, r, h, vertices, True, location )
+
+    p = Plane()
+    ScaleUniform( p, r * 3.0 )
+    RotateDegX( p, 90 )
+    Difference( ob, p, False )
+
+    RotateDegX( p, 180 )
+    RotateDegZ( p, angle )
+    Difference( ob, p, True )
+
+    return( ob )
+
 def MeshCylinder( name=None, r=1.0, h=5.0, r_faces=5, h_faces=5, c_faces=10, location=(0,0,0), quads=True ):
     """Draw a cylinder with the height along the Z axis with control of the faces
 
@@ -1132,7 +1159,7 @@ def CharMetrics( ch, font=None ):
     metrics = {}
     
     if len( ch ) != 1:
-        raise "Input '%s' is not a single character" % ch
+        raise Exception( "Input '%s' is not a single character" % ch )
 
     # store the location of current 3d cursor
     saved_location = bpy.context.scene.cursor_location  # returns a vector
@@ -1296,7 +1323,7 @@ def SphericalText( text='Abc123', font=None, r=1, thickness=.05, angular_height=
 
     for c in text:
         if c == ' ':
-            raise "No spaces allowed!"
+            raise Exception( "No spaces allowed!" )
 
     # Get the text metrics
     metrics = TextMetrics( text, font )
@@ -1556,6 +1583,18 @@ def Mesh( name=None, verts=[], edges=[], faces=[] ):
     if name is not None:
         ob.name = name
     bpy.data.scenes[0].objects.link( ob )
+
+    bpy.ops.object.select_all(action='DESELECT')
+    ob.select = True
+    bpy.context.scene.objects.active = ob
+    # go edit mode
+    bpy.ops.object.mode_set(mode='EDIT')
+    # select al faces
+    bpy.ops.mesh.select_all(action='SELECT')
+    # recalculate outside normals 
+    bpy.ops.mesh.normals_make_consistent(inside=False)
+    # go object mode again
+    bpy.ops.object.editmode_toggle()
 
     return ob
 
@@ -2295,9 +2334,52 @@ def SetOriginCenter( ob ):
     Return nothing
     """
     bb = ob.bound_box
-    ( lx, ly, lz ) = bb[ 0 ]
-    ( hx, hy, hz ) = bb[ 6 ]
-    SetOrigin( ob, lx + ( hx - lx ) / 2, ly + ( hy - ly ) / 2, lz + ( hz - lz ) / 2 )
+    min_x = min( bb[0][0], bb[1][0], bb[2][0], bb[3][0], bb[4][0], bb[5][0], bb[6][0], bb[7][0] )
+    max_x = max( bb[0][0], bb[1][0], bb[2][0], bb[3][0], bb[4][0], bb[5][0], bb[6][0], bb[7][0] )
+    min_y = min( bb[0][1], bb[1][1], bb[2][1], bb[3][1], bb[4][1], bb[5][1], bb[6][1], bb[7][1] )
+    max_y = max( bb[0][1], bb[1][1], bb[2][1], bb[3][1], bb[4][1], bb[5][1], bb[6][1], bb[7][1] )
+    min_z = min( bb[0][2], bb[1][2], bb[2][2], bb[3][2], bb[4][2], bb[5][2], bb[6][2], bb[7][2] )
+    max_z = max( bb[0][2], bb[1][2], bb[2][2], bb[3][2], bb[4][2], bb[5][2], bb[6][2], bb[7][2] )
+
+    x = ( max_x - min_x ) / 2.0
+    y = ( max_y - min_y ) / 2.0
+    z = ( max_z - min_z ) / 2.0
+    SetOrigin( ob, x, y, z )
+
+def SetOriginToGeometry( ob ):
+    """Set an object's origin to the geometry center
+
+    The object's origin specifies the object's location.
+    During rotation, the object's origin is used as the rotation origin.
+
+    Keyword arguments:
+    ob -- The object to set the origin on
+
+    Return nothing
+    """
+    # set the origin on the current object to the 3dcursor location
+    Select( ob )
+    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')
+
+def MinCorner( ob ):
+    mc = [ 99999999, 99999999, 99999999 ]
+    for p in Vertices( ob ):
+        Print( mc )
+        for j in range( 0, 3 ):
+            if( p[j] < mc[j] ):
+                mc[j] = p[j] 
+    return mc
+
+def SetOriginMinCorner( ob ):
+    """Set an object's origin to the bounding-box minimum corner.
+
+    Keyword arguments:
+    ob -- The object to set the origin on
+
+    Return nothing
+    """
+    ConvertToWorldCoordinates( ob )
+    SetOriginV( ob, MinCorner( ob ) )
 
 def Scale( ob, x, y, z ):
     """Scale an object
@@ -2406,6 +2488,53 @@ def ScaleAllUniform( f ):
     Return nothing
     """
     ScaleAll( f, f, f )
+
+def ScaleInset( ob, inset ):
+    """Scale all the given object such that each side is inset by the given amount.
+
+    Keyword arguments:
+    ob    -- The object to scale
+    inset -- The inset distance to scale to
+
+    Return nothing
+    """
+    ( dx, dy, dz ) = Dimensions( ob )
+
+    Print( "dx: %s" % dx )
+    Print( "dy: %s" % dy )
+    Print( "dz: %s" % dz )
+
+    inset = float( inset )
+    inset2 = inset * 2.0
+
+    dxi = dx - inset2
+    dyi = dy - inset2
+    dzi = dz - inset2
+
+    Print( "dxi: %s" % dxi )
+    Print( "dyi: %s" % dyi )
+    Print( "dzi: %s" % dzi )
+
+    if( dxi > 0 ):
+        sx = dxi / dx
+    else:
+        raise Exception( "Cannot scale to inset because the x extent %s is smaller than twice the inset %s" % ( dx, inset2 ) )
+
+    if( dyi > 0 ):
+        sy = dyi / dy
+    else:
+        raise Exception( "Cannot scale to inset because the y extent %s is smaller than twice the inset %s" % ( dy, inset2 ) )
+
+    if( dzi > 0 ):
+        sz = dzi / dz
+    else:
+        raise Exception( "Cannot scale to inset because the z extent %s is smaller than twice the inset %s" % ( dz, inset2 ) )
+
+    Print( "sx: %s" % sx )
+    Print( "sy: %s" % sy )
+    Print( "sz: %s" % sz )
+
+    Scale( ob, sx, sy, sz )
     
 def Translate( ob, x, y, z ):
     """Translate (move) an object
@@ -2505,6 +2634,16 @@ def TranslateToV( ob, v=(1,1,1) ):
     Return nothing
     """
     TranslateTo( ob, v[0], v[1], v[2] )
+
+def TranslateToOrigin( ob ):
+    """Translate (move) an object to the origin
+
+    Keyword arguments:
+    ob -- The object to translate. None means the currently-selected object.
+
+    Return nothing
+    """
+    TranslateTo( ob, 0, 0, 0 )
 
 def RotateRad( ob, angle, axis=(0,0,1.0) ):
     """Rotate an object about its origin
@@ -2680,6 +2819,55 @@ def PositionPolar( ob, r=1.0, z_angle=0.0, xy_angle=0.0 ):
     # Fifth, rotate the object around the Z axis.
     RotateDeg( ob, z_angle, ( 0, 0, 1 ) )
 
+def ShrinkWrap( ob ):
+    """Create a new object that is a shrink-wrapped skin over the given object.
+
+    Keyword arguments:
+    ob -- The object to shrink wrap
+
+    Return the new object
+    """
+    global russbpy_modnum_gen
+
+    # Find the biggest coordinate.
+    bb = ob.bound_box
+
+    m = 0;   
+    for p in bb:
+        for v in p:
+            a = abs( v )
+            if( m < a ):
+                m = a
+    s = Cube( size=m*3.0 )
+    Subdivide( s, times=5 )
+
+    Select( s )
+    # Add a modifier
+    mod = s.modifiers.new('mymod', 'SHRINKWRAP')
+    mod.name = "modifier_%d" % russbpy_modnum_gen
+    russbpy_modnum_gen = russbpy_modnum_gen + 1
+    mod.target = ob
+    
+    # Copy materials from one object to the other
+    for mat in s.data.materials:
+        s.data.materials.append( mat )
+
+    # Apply modifier
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier=mod.name)
+
+    # Remove duplicate vertices, since these can prevent later operations.
+    Select( s )
+    bpy.ops.object.mode_set(mode = 'EDIT')
+    # TODO: Keep calling remove_doubles() while the number of vertices is reducing.
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.object.mode_set(mode = 'OBJECT')
+
+    return s
+
 def SetColor( ob, rgb=None ):
     """Set an object's color. If the ogject is None, set the current global color.
 
@@ -2700,7 +2888,7 @@ def SetColor( ob, rgb=None ):
     else:
         # Just set the current color
         if rgb is None:
-            raise "Cannot set the current color to None"
+            raise Exception( "Cannot set the current color to None" )
         russbpy_color = rgb
         return
     if rgb is None:
@@ -2771,6 +2959,59 @@ def RandomPointInRectangularPrism( x=1, y=2, z=3, location=(0,0,0) ):
     rz = ( random() * z - z / 2.0 ) + location[ 2 ]
 
     return ( rx, ry, rz )
+    
+def Bevel( ob, width=0.01, segments=1 ):
+    """Bevel the given solid
+
+    Keyword arguments:
+    ob        -- The object to bevel
+    width     -- The width of the bevel
+    segments  -- The number of segments in the bevel. Set to > 1 for a rounded bevel.
+
+    Return the object, now bevelled
+    """
+    global russbpy_modnum_gen
+
+    Select( ob )
+    # Add a modifier
+    mod = ob.modifiers.new(name='beveller', type='BEVEL')
+    mod.name = "modifier_%d" % russbpy_modnum_gen
+    russbpy_modnum_gen = russbpy_modnum_gen + 1
+    mod.width = width
+    mod.segments = segments
+
+    # Apply modifier
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier=mod.name)
+
+    return ob
+    
+def Hollow( ob, thickness=0.1, inward=True ):
+    """Hollow the given object
+
+    Keyword arguments:
+    ob        -- The object to hollow
+    thickness -- The thickness of the hollow object's wall
+    inward    -- The direction to hollow. False means grow outward.
+
+    Return the object, now hollowed
+    """
+    global russbpy_modnum_gen
+
+    Select( ob )
+    # Add a modifier
+    mod = ob.modifiers.new(name='hollower', type='SOLIDIFY')
+    mod.name = "modifier_%d" % russbpy_modnum_gen
+    russbpy_modnum_gen = russbpy_modnum_gen + 1
+    mod.thickness = thickness
+    if inward:
+        mod.offset = -1.0
+    else:
+        mod.offset = 1.0
+
+    # Apply modifier
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier=mod.name)
+
+    return ob
     
 def Boolean( ob1, ob2, op, delete=False ):
     """Perform a Boolean CSG (Constructive Solid Geometry) operation
