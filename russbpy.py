@@ -623,7 +623,15 @@ def RoundedRectangularPrism( name=None, x=1, y=2, z=3, z_r=.1, location=(0,0,0) 
     c4 = Cylinder( r=z_r, h=z, location=(-x2,-y2,0) )
 
     ob = Join( r1, r2, c1, c2, c3, c4 )
+
+    # TODO: Keep calling remove_doubles() while the number of vertices is reducing.
+    bpy.ops.object.mode_set(mode = 'EDIT')
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.object.mode_set(mode = 'OBJECT')
+
     TranslateV( ob, location )
+
     return ob
 
 
@@ -3153,7 +3161,7 @@ def SubdivideFractal( ob, fractal=1, times=5, seed=1 ):
 
     Return nothing
     """
-    Subdivide( ob, fractal=f, times=times, fractal_along_normal=1)
+    Subdivide( ob, fractal=fractal, times=times, fractal_along_normal=1)
 
 def FaceCenter( ob, face_num=0 ):
     """Determine the point at the center of the given face.
