@@ -424,7 +424,45 @@ def MeshSphere( name=None, r=1.0, latitudes=11, longitudes=10, location=(0,0,0),
 
     return ob
 
-def SpiralPointsOnSphere( r=1, num_loops=3, points_per_loop=10, clockwise=False ):
+def HelixPoints( r=1.0, h=1.0, num_loops=3, points_per_loop=10, clockwise=False ):
+    """Return an array of 3D points on a helix around a cylinder from end to end
+
+    Keyword arguments:
+    r               -- The radius of the cylinder
+    h               -- The height of the cylinder
+    num_loops       -- The number of 360-degree loops in the spiral
+    points_per_loop -- The number of points per loop
+    clockwise       -- Use clockwise traversal? (set to False for counter-clockwise)
+
+    return the array of points (size is num_loops x points_per_loop)
+    """
+    r = float( r )
+    h = float( h )
+
+    # Traverse the cylinder from end to end.
+    num_points = num_loops * points_per_loop + 1
+    z_step = h / float( num_points )
+    loop_step = float( 360.0 / float( points_per_loop ) )
+    if clockwise:
+        loop_step = -loop_step
+
+    points = []
+    loop_angle = 0.0
+    z = -h / 2.0
+    for l in range( 0, num_loops ):
+        for p in range( 0, points_per_loop ):
+            # Calculate the cylindrical position
+            x = r * Cos( loop_angle )
+            y = r * Sin( loop_angle )
+
+            points.append( ( x, y, z ) )
+
+            loop_angle += loop_step
+            z += z_step
+
+    return points
+
+def SpiralPointsOnSphere( r=1.0, num_loops=3, points_per_loop=10, clockwise=False ):
     """Return an array of 3D points that spiral around a sphere from pole to pole.
 
     Keyword arguments:
@@ -885,7 +923,7 @@ def Cylinder( name=None, r=1.0, h=1.0, vertices=None, cap=True, location=(0,0,0)
     return( ob )
 
 def Pie3D( name=None, r=1.0, h=1.0, angle=30.0, vertices=None, location=(0,0,0) ):
-    """Draw a cylindrical pie slice  with the height along the Z axis and return the corresponding object
+    """Draw a cylindrical pie slice with the height along the Z axis and return the corresponding object
 
     Keyword arguments:
     name     -- The name for the new cylinder object
@@ -1048,7 +1086,7 @@ def MeshCylinder( name=None, r=1.0, h=5.0, r_faces=5, h_faces=5, c_faces=10, loc
 
     return ob
 
-def CylinderP2P( name=None, r=1.0, p1=(0,0,0), p2=(1.0,1.0,1.0) ):
+def CylinderP2P( name=None, r=1.0, p1=(0,0,0), p2=(1.0,1.0,1.0), scale_z=1.0 ):
     """Draw a cylinder from p1 to p2.
 
     Keyword arguments:
@@ -1056,11 +1094,13 @@ def CylinderP2P( name=None, r=1.0, p1=(0,0,0), p2=(1.0,1.0,1.0) ):
     r        -- The radius
     p1       -- The start point
     p2       -- The end point
+    scale_z  -- The scale factor to apply to the Cylinder
 
     Return the cylinder object
     """
     h = DistanceV( p1, p2 )
     c = Cylinder( name=name, r=r, h=h )
+    ScaleZ( c, scale_z )
 
     # Point the cylinder up from the origin
     TranslateZ( c, h / 2.0 )
@@ -1265,8 +1305,8 @@ def Text( name=None, text="abc123", h=1, font=None, align='LEFT', bevel_depth=0.
     bpy.ops.object.text_add()
     ob=Current()
     if font is not None:
-        russbpy_fn = bpy.data.fonts.load( font )
-        ob.data.font = russbpy_fn
+        fn = bpy.data.fonts.load( font )
+        ob.data.font = fn
     if name is not None:
         ob.name = name
     ob.data.body = text
@@ -1307,7 +1347,7 @@ def ShowFont( font ):
             TranslateX( t, i * 2 )
             TranslateY( t, j * 2 )
 
-def SphericalText( text='Abc123', font=None, r=1, thickness=.05, angular_height=30, r_offset=0, subdivide=1, spacer_deg=4 ):
+def SphericalText( text='Abc123', font=None, r=1, thickness=.05, angular_height=30, r_offset=0, subdivide=1, spacer_deg=4, name=None ):
     """Draw solid, spherical text and return the corresponding object
 
     The first character of the text is rendered near (r,0,0).
@@ -1325,6 +1365,7 @@ def SphericalText( text='Abc123', font=None, r=1, thickness=.05, angular_height=
                       Negative values rorate the text towards the bottom of the sphere.
     subdivide      -- The number of subdivisions. Higher numbers mean more, smaller faces
     spacer_deg     -- The number of spacer degrees between characters
+    name           -- The name for the object
 
     Return the spherical text object
     """
@@ -1423,6 +1464,9 @@ def SphericalText( text='Abc123', font=None, r=1, thickness=.05, angular_height=
         Intersect( obs[ i ], outer, True )
 
     j = Join( obs )
+
+    if name is not None:
+        j.name = name
 
     return j
 
@@ -1624,16 +1668,17 @@ def TriangleV( name=None, v1=(0,0,0), v2=(0,1,0), v3=(0,0,1) ):
     faces = [ [ 0, 1, 2 ] ]
     return Mesh( name, verts, [], faces )
 
-def NGonPrism( name=None, r=1.0, h=1.0, sides=8, open=False ):
+def NGonPrism( name=None, r=1.0, h=1.0, sides=8, open=False, location=(0,0,0) ):
     """Draw an N-gon prism and return the correcponding object
 
     Keyword arguments:
-    name  -- The name for the new N-gon prism object
-    r     -- The outer radius of the N-gon, ie. measured at the vertices
-    h     -- The height
-    sides -- The number of sides to the N-gon ends of the prism
-    open  -- Leave the prism open at the ends?
-               Otherwise the ends are capped
+    name     -- The name for the new N-gon prism object
+    r        -- The outer radius of the N-gon, ie. measured at the vertices
+    h        -- The height
+    sides    -- The number of sides to the N-gon ends of the prism
+    open     -- Leave the prism open at the ends?
+                Otherwise the ends are capped
+    location -- The location of the center of the NGonPrism
 
     Return the N-gon prism object
     """
@@ -1665,7 +1710,10 @@ def NGonPrism( name=None, r=1.0, h=1.0, sides=8, open=False ):
             faces.append( [ l, r, sides * 2 ] )
             faces.append( [ l + 1, sides * 2 + 1, r + 1 ] )
 
-    return Mesh( name, verts, [], faces )
+    m = Mesh( name, verts, [], faces )
+    TranslateToV( m, location )
+
+    return m
 
 def Arrow( body_x=10, body_y=1, body_z=1, head_r=2 ):
     """Draw an arrow and return the corresponding object
@@ -2114,7 +2162,10 @@ def TriangularPrism( name=None, base=2.0, height=1.5, depth=0.5, location=(0,0,0
 
     faces = [ ( 0, 1, 2 ), ( 3, 4, 1, 0 ), ( 4, 5, 2, 1 ), ( 5, 3, 0, 2 ), ( 4, 3, 5 ) ]
 
-    return Mesh( name, verts, [], faces )
+    m = Mesh( name, verts, [], faces )
+    TranslateToV( m, location )
+
+    return m
 
 def Rack( name=None, length=10.0, width=1.0, height=1.0, tooth_height=0.5, tooth_width=0.5, file_depth=0.1 ):
     """Create a rack, suitable for a pinion.
@@ -2217,6 +2268,153 @@ def Pinion( name=None, r=1.0, h=1.0, tooth_depth=0.5, file_depth=0.1, num_teeth=
 
     TranslateToV( o, location )
     return o
+
+def Screw( name='thread', r=1.0, depth=0.1, file_depth=0, spacing=0.5, base_h=0.1, num_turns=3 ):
+##########################################################
+# TODO: Extend the screw by 2 turns, then clip the ends for a smooth finish.
+##########################################################
+    """Create the cylindrical part of a screw.
+
+    The screw starts at the origin, and points up towars the Z-axis.
+    
+    Keyword arguments:
+    r             -- The radius of the cylinder (without the teeth)
+    depth         -- The depth of the tooth, without filing
+    tooth_depth   -- The depth of the gear teeth
+    file_depth    -- The amount of the tooth removed (filed down) from the tip (< tooth_depth)
+    num_turns     -- The number of 360 degree turns of the screw
+    spacing       -- The vertical distance between the base of the threads
+    base_h        -- The height of the base of the thread cross-section (> 0)
+    
+    Return the object
+    """
+    # Thread profile:
+    #
+    # s            |              \          
+    #              |               | spacing              
+    #              |              /          
+    # a           /    \                    
+    #            /      |                  
+    # b         /       |                 
+    #           |       |            
+    # tip     . |       | base_h     
+    #           |       |                 
+    # c         \       |                 
+    #            \      |                  
+    # d           \    /                    
+    #
+    #         \___/
+    #         depth
+    #
+    #         \/
+    #     file_depth
+    #
+    tip_z = base_h / 2.0
+    tip_x = r + depth
+
+    dx = r
+    dz = 0
+    
+    ax = dx
+    az = dz + base_h
+
+    sx = r
+    sz = base_h + spacing
+
+    # Calculate the inner (half) angle theta between horizontal and the edge of the (unfiled) thread
+    # tan( theta ) = tip_z / tip_x
+    theta = ATan( tip_z / tip_x )
+
+    if file_depth > 0:
+        cx = tip_x - file_depth
+        # tan( theta ) = ( tip_z - cz ) / file_depth
+        # file_depth * tan( theta ) = ( tip_z - cz )
+        # file_depth * tan( theta ) - tip_z = - cz
+        cz = tip_z - file_depth * ( tip_z / tip_x )
+    
+        bx = cx
+        bz = tip_z + file_depth * tan( theta )
+    
+        if spacing == 0:
+            verts = [
+                [ dx, 0, dz ],
+                [ cx, 0, cz ],
+                [ bx, 0, bz ],
+                [ ax, 0, az ]
+            ]
+            edges = [
+                [ 0, 1 ],
+                [ 1, 2 ],
+                [ 2, 3 ]
+            ]
+        else:
+            verts = [
+                [ dx, 0, dz ],
+                [ cx, 0, cz ],
+                [ bx, 0, bz ],
+                [ ax, 0, az ],
+                [ sx, 0, sz ]
+            ]
+            edges = [
+                [ 0, 1 ],
+                [ 1, 2 ],
+                [ 2, 3 ],
+                [ 3, 4 ]
+            ]
+    else:
+        if spacing == 0:
+            verts = [
+                [ dx, 0, dz ],
+                [ tip_x, 0, tip_z ],
+                [ ax, 0, az ]
+            ]
+            edges = [
+                [ 0, 1 ],
+                [ 1, 2 ]
+            ]
+        else:
+            verts = [
+                [ dx, 0, dz ],
+                [ tip_x, 0, tip_z ],
+                [ ax, 0, az ],
+                [ sx, 0, sz ]
+            ]
+            edges = [
+                [ 0, 1 ],
+                [ 1, 2 ],
+                [ 2, 3 ]
+            ]
+    m = Mesh( name='screw_base', verts=verts, edges=edges, faces=[] )
+    
+    ClearTransformations( m )	# Also selects
+
+    # Add a modifier
+    mod = m.modifiers.new('screw1', 'SCREW')
+    mod.name = "modifier_%d" % russbpy_modnum_gen
+    mod.angle = DegToRad( 360.0 )
+    mod.axis = 'Z'
+    mod.iterations = num_turns + 2.0
+    mod.steps = 100
+    mod.screw_offset = base_h + spacing
+    mod.use_normal_flip = True
+
+    # Apply modifier
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier=mod.name)
+    bpy.ops.object.mode_set(mode = 'EDIT')
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.mesh.remove_doubles()
+    bpy.ops.object.mode_set(mode = 'OBJECT')
+
+    shaft_h = (base_h + spacing) * ( num_turns + 2 )
+    shaft = Cylinder( r=r, h=shaft_h, location=(0,0,shaft_h/2.0) )
+    
+    screw = Join( m, shaft )
+
+    TranslateZ( screw, -( base_h + spacing ) * 1.000001 )
+    Clip( screw, 0, 0, -1 )
+
+    return screw
     
 
 #################################################
@@ -2275,6 +2473,10 @@ def Join( *obs ):
             add = True
     bpy.ops.object.join()
     return Current()
+
+def ClearTransformations( ob ):
+    Select( ob )
+    bpy.ops.object.transform_apply( location=True, rotation=True, scale=True )
 
 def SetOrigin( ob, x, y, z ):
     """Set an object's origin
@@ -3005,7 +3207,8 @@ def Hollow( ob, thickness=0.1, inward=True ):
     """
     global russbpy_modnum_gen
 
-    Select( ob )
+    ClearTransformations( ob )
+
     # Add a modifier
     mod = ob.modifiers.new(name='hollower', type='SOLIDIFY')
     mod.name = "modifier_%d" % russbpy_modnum_gen
@@ -3055,7 +3258,7 @@ def Boolean( ob1, ob2, op, delete=False ):
 
     return ob1
 
-def Intersect( ob1, ob2, delete=False ):
+def Intersection( ob1, ob2, delete=False ):
     """Intersect ob1 with ob2
 
     WARNING! This operation can take a LONG time with complex objects!
@@ -3073,6 +3276,11 @@ def Intersect( ob1, ob2, delete=False ):
     Return an object consisting of the solid spaces that occur in both ob1 and ob2
     """
     return Boolean( ob1, ob2, 'INTERSECT', delete )
+
+def Intersect( ob1, ob2, delete=False ):
+    """ Deprecated legacy function. Use Intersection() instead.
+    """
+    return Intersection( ob1, ob2, delete )
     
 def Union( ob1, ob2, delete=False ):
     """Union ob1 and ob2
@@ -3112,6 +3320,108 @@ def Difference( ob1, ob2, delete=False ):
     Return an object consisting of the solid spaces in ob1 and not in ob2
     """
     return Boolean( ob1, ob2, 'DIFFERENCE', delete )
+
+def Clip( ob, x=0, y=0, z=0, size=10000000 ):
+    """Remove up to half of the object in each axis
+
+    Keyword arguments:
+    ob      -- The object
+    x       -- Remove half in x? x is in (-1, 0, 1)
+    y       -- Remove half in y? y is in (-1, 0, 1)
+    z       -- Remove half in z? z is in (-1, 0, 1)
+
+    Return an object that is the result of the operation
+    """
+
+    size2 = size / 2.0
+    c = Cube( size=size )
+
+    if( x > 0 ):
+        TranslateX( c, size2 )
+        Difference( ob, c, False )
+        TranslateX( c, -size2 )
+    else:
+        if( x < 0 ):
+            TranslateX( c, -size2 )
+            Difference( ob, c, False )
+            TranslateX( c, size2 )
+
+    if( y > 0 ):
+        TranslateY( c, size2 )
+        Difference( ob, c, False )
+        TranslateY( c, -size2 )
+    else:
+        if( y < 0 ):
+            TranslateY( c, -size2 )
+            Difference( ob, c, False )
+            TranslateY( c, size2 )
+
+    if( z > 0 ):
+        TranslateZ( c, size2 )
+        Difference( ob, c, False )
+        TranslateZ( c, -size2 )
+    else:
+        if( z < 0 ):
+            TranslateZ( c, -size2 )
+            Difference( ob, c, False )
+            TranslateZ( c, size2 )
+
+    Delete( c )
+
+    return ob
+    
+def Array( ob, count=3, x_offset=0, y_offset=0, z_offset=0, x_rel_offset=0, y_rel_offset=0, z_rel_offset=0, offset_object=None ):
+    """Perform an array operation to distribute copies of an object.
+
+    See: https://docs.blender.org/api/2.79/bpy.types.ArrayModifier.html?highlight=array%20modifier#bpy.types.ArrayModifier 
+
+    Keyword arguments:
+    ob             -- The object
+    x_offset       -- The constant X offset
+    y_offset       -- The constant Y offset
+    z_offset       -- The constant Z offset
+    x_rel_offset   -- The relative X offset
+    y_rel_offset   -- The relative Y offset
+    z_rel_offset   -- The relative Z offset
+    offset_object  -- The object whose location and rotation is used per array element
+
+    Return an object that is the result of the operation
+    """
+    global russbpy_modnum_gen
+
+    ClearTransformations( ob )
+
+    # Add a modifier
+    mod = ob.modifiers.new('array', 'ARRAY')
+    mod.name = "modifier_%d" % russbpy_modnum_gen
+    russbpy_modnum_gen = russbpy_modnum_gen + 1
+
+    mod.count = count
+
+    if( x_offset != 0 or y_offset != 0 or z_offset != 0 ):
+        mod.use_constant_offset = True
+        mod.constant_offset_displace[0] = x_offset
+        mod.constant_offset_displace[1] = y_offset
+        mod.constant_offset_displace[2] = z_offset
+    else:
+        mod.use_constant_offset = False
+
+    if( x_rel_offset != 0 or y_rel_offset != 0 or z_rel_offset != 0 ):
+        mod.use_relative_offset = True
+        mod.relative_offset_displace[0] = x_rel_offset
+        mod.relative_offset_displace[1] = y_rel_offset
+        mod.relative_offset_displace[2] = z_rel_offset
+    else:
+        mod.use_relative_offset = False
+
+    if( offset_object is not None ):
+        mod.use_object_offset = True
+        mod.offset_object = offset_object
+    else:
+        mod.use_object_offset = False
+
+    # Apply modifier
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier=mod.name)
 
 def Subdivide( ob, times=1, fractal=0, fractal_along_normal=1, seed=1 ):
     """Subdivide the object's faces into smaller areas
